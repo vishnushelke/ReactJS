@@ -63,9 +63,6 @@ class Register extends Component {
                             className="lastname"
                         />
                     </div>
-
-
-
                     <div className="email">
                         <TextField
                             required
@@ -73,8 +70,16 @@ class Register extends Component {
                             label="Email"
                             margin="normal"
                             variant="outlined"
-                            
+
                         />
+                        <TextField
+                            id="outlined-required"
+                            label="Phone Number"
+                            margin="normal"
+                            variant="outlined"
+
+                        />
+
                     </div>
                     <div className="password">
                         <div>
@@ -88,28 +93,6 @@ class Register extends Component {
                                 value={password}
                                 onChange={this.PasswordChangeHandler}
                             />
-                            {/* <FormControl variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-password"
-                        type={values.showPassword ? 'text' : 'password'}
-                        value={values.password}
-                        onChange={handleChange('password')}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                >
-                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                        }
-                        labelWidth={70}
-                    />
-                </FormControl> */}
-
                         </div>
                         <div>
                             <TextField
@@ -127,11 +110,11 @@ class Register extends Component {
 
 
                     <div className="buttonsRegister">
-                        <Button variant="contained" color="primary" type="submit">Register</Button>
+                        <Button variant="contained" color="primary" type="submit" onClick={this.HandelConfirmPasswordChange}>Register</Button>
                     </div>
                     <br></br>
                     <div className="referenceLogin">
-                        <a href="">already Registered?</a>
+                        <a href="">already registered?</a>
                     </div>
 
                 </div>

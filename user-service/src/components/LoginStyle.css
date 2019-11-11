@@ -22,3 +22,17 @@
     margin-right: 35%;
     border: red;
 }
+.emailLogin{
+   
+    display: flex;
+    align-items: flex-start;
+   
+}
+.passwordLogin{
+    /* width: 470px; */
+    display: flex;
+    align-items: flex-start;
+}
+.eyeIcon{
+    width: 70px;
+}

@@ -3,7 +3,29 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import './LoginStyle.css'
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 class Login extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            showPassword: false,
+
+        }
+    }
+    submitLogin=()=>{
+        this.props.history.push('/register')
+    }
+    handleChange = prop => event => {
+        this.setState({ [prop]: event.target.value });
+      };
+    
+      handleClickShowPassword = () => {
+        this.setState(state => ({ showPassword: !state.showPassword }));
+      };
     render() {
         return (
             <Card className="myCard">
@@ -19,6 +41,8 @@ class Login extends Component {
                         </h3>
                         <h3>Sign in</h3>
                         <h4>Continue to Fundoo</h4>
+                    </div>
+                    <div className="emailLogin">
                         <TextField
                             required
                             id="outlined-required"
@@ -28,42 +52,34 @@ class Login extends Component {
                             fullWidth
                         />
                     </div>
-                    <div>
+                    <div className="passwordLogin">
                         <TextField
-                            required
-                            id="outlined-password-input"
-                            label="Password"
-                            type="password"
-                            margin="normal"
-                            variant="outlined"
+                            id="outlined-adornment-password"
                             fullWidth
-                        />
-                        {/* <FormControl variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-password"
-                                type={values.showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                onChange={handleChange('password')}
-                                endAdornment={
+                            required
+                            variant="outlined"
+                            type={this.state.showPassword ? 'text' : 'password'}
+                            label="Password"
+                            value={this.state.password}
+                            onChange={this.handleChange('password')}
+                            InputProps={{
+                                endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
+                                            aria-label="Toggle password visibility"
+                                            onClick={this.handleClickShowPassword}
                                         >
-                                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
                                         </IconButton>
                                     </InputAdornment>
-                                }
-                                labelWidth={70}
-                            />
-                        </FormControl> */}
+                                ),
+                            }}
+                        />
 
                     </div>
 
                     <div className="buttons">
-                        <Button variant="contained" color="primary">Login</Button>
+                        <Button variant="contained" color="primary" onClick={this.submitLogin}>Login</Button>
                         <Button variant="contained" color="secondary">Forget</Button>
                     </div>
                     <br></br>
