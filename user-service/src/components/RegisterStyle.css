@@ -33,9 +33,15 @@
     justify-content: space-between;
 }
 .password{
+    padding-top: 17px;
     display: flex;
+    width: 230px;
     justify-content: space-between;
 }
-.MuiPaper-elevation1{
-
+.eyeIconRegister{
+    width: 1px;
+}
+.passwordDiv{
+    display: flex;
+    justify-content: space-between;
 }

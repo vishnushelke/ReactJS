@@ -8,6 +8,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Register from './Register';
+import {LoginUser} from './Service'
 import { Link } from '@material-ui/core';
 class Login extends Component {
     constructor(props) {
@@ -15,7 +16,8 @@ class Login extends Component {
 
         this.state = {
             showPassword: false,
-
+            email:'',
+            password:''
         }
     }
     handleRegister=()=>{
@@ -25,10 +27,28 @@ class Login extends Component {
         this.props.history.push('/forgetpassword')
     }
     submitLogin=()=>{
-        this.props.history.push('/Dashboard')
+        console.log('In service');
+        
+        let loginDto={}
+        
+        loginDto.email=this.state.email;
+        loginDto.password=this.state.password;
+        console.log('hi',loginDto)
+        LoginUser(loginDto).then(loginDto=>{
+            console.log(loginDto);
+            this.props.history.push('/Dashboard')
+            
+        }).catch(err=>
+            {
+                console.log('error')
+            })
+       
     }
-    handleChange = prop => event => {
-        this.setState({ [prop]: event.target.value });
+    handleChangeEmail =(event) => {
+        this.setState({ email: event.target.value });
+      };
+    handleChangePassword = (event) => {
+        this.setState({ password: event.target.value });
       };
     
       handleClickShowPassword = () => {
@@ -54,26 +74,28 @@ class Login extends Component {
                         <TextField
                             required
                             id="outlined-required"
+                            name="email"
                             label="Email"
                             margin="normal"
                             variant="outlined"
-                            fullWidth
+                            onChange={this.handleChangeEmail}
+                            // fullWidth
                         />
                     </div>
                     <div className="passwordLogin">
                         <TextField
                             id="outlined-adornment-password"
-                            fullWidth
+                            // fullWidth
+                            name="password"
                             required
                             variant="outlined"
                             type={this.state.showPassword ? 'text' : 'password'}
                             label="Password"
-                            value={this.state.password}
-                            onChange={this.handleChange('password')}
+                            onChange={this.handleChangePassword}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
-                                        <IconButton
+                                        <IconButton className="eyeIcon"
                                             aria-label="Toggle password visibility"
                                             onClick={this.handleClickShowPassword}
                                         >

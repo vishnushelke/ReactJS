@@ -5,7 +5,7 @@ import Card from "@material-ui/core/Card";
 
 class VerifyUserToReset extends Component {
   VerifyHandler=()=>{
-    this.props.history.push('/Login')
+    this.props.history.push('/ResetPassword')
   }
   render() {
     return (
