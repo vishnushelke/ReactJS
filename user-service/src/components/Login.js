@@ -7,6 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Register from './Register';
+import { Link } from '@material-ui/core';
 class Login extends Component {
     constructor(props) {
         super(props)
@@ -16,8 +18,14 @@ class Login extends Component {
 
         }
     }
+    handleRegister=()=>{
+        this.props.history.push('/Register')
+    }
+    submitForget=()=>{
+        this.props.history.push('/forgetpassword')
+    }
     submitLogin=()=>{
-        this.props.history.push('/register')
+        this.props.history.push('/Dashboard')
     }
     handleChange = prop => event => {
         this.setState({ [prop]: event.target.value });
@@ -80,11 +88,12 @@ class Login extends Component {
 
                     <div className="buttons">
                         <Button variant="contained" color="primary" onClick={this.submitLogin}>Login</Button>
-                        <Button variant="contained" color="secondary">Forget</Button>
+                        <Button variant="contained" color="secondary" onClick={this.submitForget}>Forget</Button>
                     </div>
                     <br></br>
                     <div className="referenceRegister">
-                        <a href="">Register</a>
+                       {/* <Link to={'/register'}></Link> */}
+                       <Link onClick={this.handleRegister}>new user?</Link>
                     </div>
 
                     {/* <Link href="{forgot.js}"/> */}

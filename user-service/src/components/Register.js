@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import './RegisterStyle.css'
+import { Link } from '@material-ui/core';
 class Register extends Component {
     constructor(props) {
         super(props)
@@ -25,6 +26,11 @@ class Register extends Component {
     PasswordHandler = event => {
         if (this.state.password !== this.state.confirmpassword)
             console.log('error')
+            else
+            this.props.history.push('/VerifyUser')
+    }
+    LinkLoginHandler=()=>{
+        this.props.history.push('/Login')
     }
 
     render() {
@@ -110,11 +116,11 @@ class Register extends Component {
 
 
                     <div className="buttonsRegister">
-                        <Button variant="contained" color="primary" type="submit" onClick={this.HandelConfirmPasswordChange}>Register</Button>
+                        <Button variant="contained" color="primary" type="submit" onClick={this.PasswordHandler}>Register</Button>
                     </div>
                     <br></br>
                     <div className="referenceLogin">
-                        <a href="">already registered?</a>
+                        <Link onClick={this.LinkLoginHandler}>already registered?</Link>
                     </div>
 
                 </div>

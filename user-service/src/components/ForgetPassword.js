@@ -17,12 +17,12 @@ export class ForgetPassword extends Component {
                         <span style={{ color: 'green' }}>o</span>
                         <span>o</span>
                     </h3>
-                    <h3>Forgot Password</h3>
+                    <h4>Forgot Password</h4>
                     <h4>Continue to Fundoo</h4>
                     <TextField
                         required
                         id="outlined-required"
-                        label="Email"
+                        label="Enter your Email"
                         margin="normal"
                         variant="outlined"
                     />

@@ -62,7 +62,7 @@ class PersistentDrawer extends Component {
                 <MenuIcon />
               </IconButton>
              
-                <img src={Fundoo} alt="abc" className="image" />
+                <img src={Fundoo} alt="logo" className="image" />
                 <h3>FundooNotes</h3>
               </div>
 
