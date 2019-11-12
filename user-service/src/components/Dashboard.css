@@ -1,0 +1,42 @@
+.iconButton{
+ display: flex;
+ justify-content: flex-start;
+ float: left; 
+}
+.AppBar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+    margin-left: 10px;
+}
+.searchBar{
+    width: '500px';
+}
+.refreshIcon{
+    margin-right: 23px;
+}
+.accountCircleIcon{
+margin-right: 20px;
+}
+.searchClass{
+    display: flex;
+    justify-content: center;
+}
+.image{
+    height: 50px;
+    padding-top: 2%;
+}
+.nameIcon{
+    display: flex;
+    justify-content: space-around;
+}
+.appsIcon{
+    margin-right: 23px;
+}

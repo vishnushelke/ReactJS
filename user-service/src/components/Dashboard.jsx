@@ -1,203 +1,92 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import React, { Component } from "react";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  MenuItem,
+  InputBase,
+  Paper
+} from "@material-ui/core";
+import Fundoo from "./images.jpeg";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import MenuIcon from "@material-ui/icons/Menu";
+import "./Dashboard.css";
+import SearchIcon from "@material-ui/icons/Search";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import AppsIcon from '@material-ui/icons/Apps';
 
-const styles = theme => ({
-    root: {
-        width: '100%',
+const theme = createMuiTheme({
+  overrides: {
+    MuiExpansionPanelSummary: {
+      content: {
+        margin: "0",
+        padding: "0",
+        color: "white"
+      }
     },
-    grow: {
-        flexGrow: 1,
+    MuiToolbar: {
+      root: {
+        display: "flex",
+        justifyContent: "space-between"
+      }
     },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
+    MuiInputBase: {
+      root: {
+        width: "600px"
+        // backgroundColor: "pink"
+      }
     },
-    title: {
-        display: 'flex',
-        marginRight: '150px',
-        [theme.breakpoints.up('sm')]: {
-            display: 'block',
-        },
+    MuiSvgIcon: {
+      root: {
+        height: "1.5em"
+      }
     },
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
-        },
-        marginLeft: 1000,
-        display: 'flex',
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing.unit,
-            width: 700,
-        },
-    },
-    searchIcon: {
-        width: theme.spacing.unit * 9,
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    inputRoot: {
-        color: 'inherit',
-        width: '100%',
-    },
-    inputInput: {
-        paddingTop: theme.spacing.unit,
-        paddingRight: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit,
-        paddingLeft: theme.spacing.unit * 10,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: 200,
-        },
-    },
-    sectionDesktop: {
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-            display: 'flex',
-        },
-    },
-    sectionMobile: {
-        display: 'flex',
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
-        },
-    },
+    MuiAppBar: {
+      colorDefault: {
+        backgroundColor: "white"
+      }
+    }
+  }
 });
 
-class Dashboard extends React.Component {
-    state = {
-        anchorEl: null,
-        mobileMoreAnchorEl: null,
-    };
+class PersistentDrawer extends Component {
+  render() {
+    return (
+      <div className="rootDiv">
+        <MuiThemeProvider theme={theme}>
+          <AppBar position="fixed" className="AppBar" color="default">
+            <Toolbar>
+            <div className="nameIcon">
+              <IconButton className="iconButton" edge="start">
+                <MenuIcon />
+              </IconButton>
+             
+                <img src={Fundoo} alt="abc" className="image" />
+                <h3>FundooNotes</h3>
+              </div>
 
-    handleProfileMenuOpen = event => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
+              <Paper>
+                <div className="searchClass">
+                  <div>
+                    <SearchIcon className="search" />
+                  </div>
 
-    handleMenuClose = () => {
-        this.setState({ anchorEl: null });
-        this.handleMobileMenuClose();
-    };
+                  <InputBase placeholder="search" className="searchBar" />
+                </div>
+              </Paper>
 
-    handleMobileMenuOpen = event => {
-        this.setState({ mobileMoreAnchorEl: event.currentTarget });
-    };
-
-    handleMobileMenuClose = () => {
-        this.setState({ mobileMoreAnchorEl: null });
-    };
-
-    render() {
-        const { anchorEl, mobileMoreAnchorEl } = this.state;
-        const { classes } = this.props;
-        const isMenuOpen = Boolean(anchorEl);
-        const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-        const renderMenu = (
-            <Menu
-                anchorEl={anchorEl}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isMenuOpen}
-                onClose={this.handleMenuClose}
-            >
-                <MenuItem onClick={this.handleMenuClose}>SignOut</MenuItem>
-            </Menu>
-        );
-
-        const renderMobileMenu = (
-            <Menu
-                anchorEl={mobileMoreAnchorEl}
-                getContentAnchorEl={null}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isMobileMenuOpen}
-                onClose={this.handleMenuClose}
-            >
-                <MenuItem onClick={this.handleMobileMenuClose}>
-                    <IconButton color="primary">
-                        <Badge badgeContent={4} color="default">
-                            <MailIcon />
-                        </Badge>
-                    </IconButton>
-                   
-                </MenuItem>
-            </Menu>
-        );
-
-        return (
-            <div className={classes.root}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-                            Fundoo
-                        </Typography>
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon display />
-                            </div>
-                            <InputBase
-                                placeholder="Search…"
-                                classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput,
-                                }}
-                            />
-                        </div>
-                        <div className={classes.grow} />
-                        <div className={classes.sectionDesktop}>
-                            <IconButton
-                                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                                aria-haspopup="true"
-                                onClick={this.handleProfileMenuOpen}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                        </div>
-                        <div className={classes.sectionMobile}>
-                            <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
-                                <MoreIcon />
-                            </IconButton>
-                        </div>
-                    </Toolbar>
-                </AppBar>
-                {renderMenu}
-                {renderMobileMenu}
-            </div>
-        );
-    }
+              <div>
+                <AppsIcon className="appsIcon"/>
+                <RefreshIcon className="refreshIcon" />
+                <AccountCircleIcon className="accountCircleIcon" />
+              </div>
+            </Toolbar>
+          </AppBar>
+        </MuiThemeProvider>
+      </div>
+    );
+  }
 }
 
-Dashboard.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Dashboard);
+export default PersistentDrawer;
