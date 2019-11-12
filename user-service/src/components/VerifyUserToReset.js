@@ -1,13 +1,12 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import './VerifyUser.css'
 
-class VerifyUser extends Component {
-  VerifyHandler = () => {
-    this.props.history.push("/Login");
-  };
+class VerifyUserToReset extends Component {
+  VerifyHandler=()=>{
+    this.props.history.push('/Login')
+  }
   render() {
     return (
       <Card className="myCard">
@@ -24,15 +23,16 @@ class VerifyUser extends Component {
             <h3>Verify Yourself</h3>
             <h4>Continue to Fundoo</h4>
           </div>
-          <div className="emailLoginVerify">
+          <div className="emailLoginVerifyToReset">
             <TextField
               required
               id="outlined-required"
-              label="Enter Code sent on email"
+              label="Token"
               margin="normal"
               variant="outlined"
               fullWidth
             />
+            <h6>Please check your email for a message with your code</h6>
           </div>
           <br></br>
           <div className="buttonVerify">
@@ -50,4 +50,4 @@ class VerifyUser extends Component {
   }
 }
 
-export default VerifyUser;
+export default VerifyUserToReset;

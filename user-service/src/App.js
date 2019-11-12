@@ -6,6 +6,8 @@ import ForgetPassword from './components/ForgetPassword';
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import VerifyUser from './components/VerifyUser'
 import Dashboard from './components/Dashboard'
+import ResetPassword from './components/ResetPassword';
+import VerifyUserToReset from './components/VerifyUserToReset'
 
 function App() {
   return (
@@ -17,8 +19,11 @@ function App() {
           <Route path='/ForgetPassword' component={ForgetPassword} />
           <Route path='/Register' component={Register} />
           <Route path='/VerifyUser' component={VerifyUser} />
+          <Route path='/ResetPassword' component={ResetPassword} />
+          <Route path='/VerifyUserToReset' component={VerifyUserToReset} />
         </Switch>
      </BrowserRouter>
+      {/* <VerifyUserToReset /> */}
     </div>
   );
 }

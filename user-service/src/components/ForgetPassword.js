@@ -5,6 +5,9 @@ import Button from '@material-ui/core/Button';
 import './ForgetPasswordStyle.css'
 
 export class ForgetPassword extends Component {
+    handleForgetPassword=()=>{
+        this.props.history.push('/VerifyUserToReset')
+    }
     render() {
         return (
             <Card className="forgetPasswordCard">
@@ -19,6 +22,7 @@ export class ForgetPassword extends Component {
                     </h3>
                     <h4>Forgot Password</h4>
                     <h4>Continue to Fundoo</h4>
+                    
                     <TextField
                         required
                         id="outlined-required"
@@ -28,7 +32,7 @@ export class ForgetPassword extends Component {
                     />
                 </div>
                 <div className="buttonForgetPassword">
-                    <Button variant="contained" color="primary">Submit</Button>
+                    <Button variant="contained" color="primary" onClick={this.handleForgetPassword}>Submit</Button>
                 </div>
             </Card >
 

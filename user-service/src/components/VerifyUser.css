@@ -1,0 +1,9 @@
+.emailLoginVerify{
+    display: flex;
+    flex-direction: column;
+    padding: 0%;
+    justify-content: center;
+}
+.helpMessage{
+    padding-top: 0%;
+}
