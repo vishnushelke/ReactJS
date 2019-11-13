@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import "./RegisterStyle.css";
+import "../CssFiles/RegisterStyle.css"
 import { Link } from "@material-ui/core";
+import image from '../profile.png'
 import { RegisterUser } from "./Service";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
-class Register extends Component {
+class RegisterN extends Component {
   constructor(props) {
     super(props);
 
@@ -79,31 +80,28 @@ class Register extends Component {
   };
 
   render() {
-    const { password, confirmpassword } = this.state;
     return (
-      <Card className="myRegisterCard">
-        <div className="mainRegisterDiv" onSubmit={this.PasswordHandler}>
+      <Card>
+        <div className="registerMainDiv">
           <div>
-            <h3 className="text">
-              <span style={{ color: "red" }}>F</span>
-              <span style={{ color: "blue" }}>u</span>
+            <h3>
+              <span style={{ color: "blue" }}>F</span>
+              <span style={{ color: "red" }}>u</span>
               <span style={{ color: "brown" }}>n</span>
-              <span style={{ color: "pink" }}>D</span>
-              <span style={{ color: "silver" }}>o</span>
-              <span>o</span>
+              <span style={{ color: "blue" }}>D</span>
+              <span style={{ color: "green" }}>o</span>
+              <span style={{ color: "red" }}>o</span>
             </h3>
-          </div>
-          <div>
             <h3>Register</h3>
             <h3>Register to Fundoo</h3>
           </div>
-          <div className="name">
-            <TextField
+          <div>
+          <TextField
               required
               id="outlined-required"
               name="firstname"
               label="Firstname"
-              margin="normal"
+              margin="dense"
               variant="outlined"
               onChange={this.handleChangeFirstname}
             />
@@ -111,39 +109,32 @@ class Register extends Component {
               required
               id="outlined-required"
               label="Lastname"
-              margin="normal"
+              margin="dense"
               variant="outlined"
               className="lastname"
               name="lastname"
               onChange={this.handleChangeLastname}
             />
           </div>
-          <div className="email">
+          <div >
             <TextField
               required
               id="outlined-required"
               label="Email"
-              margin="normal"
+              margin="dense"
+              fullWidth
               variant="outlined"
               name="email"
               onChange={this.handleChangeEmail}
             />
-            <TextField
-              id="outlined-required"
-              label="Phone Number"
-              margin="normal"
-              variant="outlined"
-              name="phonenumber"
-              onChange={this.handleChangePhonenumber}
-            />
-          </div>
-          <div className="passwordDiv">
-            <div className="password">
+            </div>
+            <div >
+            <div >
               <TextField
                 id="outlined-adornment-password"
-                fullWidth
                 name="password"
                 required
+                margin="dense"
                 variant="outlined"
                 type={this.state.showPassword ? "text" : "password"}
                 label="Password"
@@ -173,7 +164,7 @@ class Register extends Component {
                 id="outlined-password-input"
                 label="Confirm-Password"
                 type="password"
-                margin="normal"
+                margin="dense"
                 variant="outlined"
                 name="confirmpassword"
                 onChange={this.HandelConfirmPasswordChange}
@@ -181,24 +172,27 @@ class Register extends Component {
             </div>
           </div>
 
-          <div className="buttonsRegister">
+          <div >
             <Button
               variant="contained"
               color="primary"
+              margin="dense"
               type="submit"
               onClick={this.PasswordHandler}
             >
               Register
             </Button>
           </div>
-          <br></br>
-          <div className="referenceLogin">
+          <div >
             <Link onClick={this.LinkLoginHandler}>already registered?</Link>
           </div>
+        </div>
+        <div>
+          <img src={image} alt="imageNew" ></img>
         </div>
       </Card>
     );
   }
 }
 
-export default Register;
+export default RegisterN;

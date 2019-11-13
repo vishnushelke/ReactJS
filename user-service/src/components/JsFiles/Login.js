@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import './LoginStyle.css'
+import '../CssFiles/LoginStyle.css'
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Register from './Register';
 import {LoginUser} from './Service'
 import { Link } from '@material-ui/core';
 class Login extends Component {
+    
     constructor(props) {
         super(props)
 
@@ -27,6 +27,10 @@ class Login extends Component {
         this.props.history.push('/forgetpassword')
     }
     submitLogin=()=>{
+        if(this.state.email===null)
+        {
+
+        }
         console.log('In service');
         
         let loginDto={}
@@ -34,8 +38,8 @@ class Login extends Component {
         loginDto.email=this.state.email;
         loginDto.password=this.state.password;
         console.log('hi',loginDto)
-        LoginUser(loginDto).then(loginDto=>{
-            console.log(loginDto);
+        LoginUser(loginDto).then(response=>{
+            console.log(response);
             this.props.history.push('/Dashboard')
             
         }).catch(err=>
@@ -45,6 +49,7 @@ class Login extends Component {
        
     }
     handleChangeEmail =(event) => {
+
         this.setState({ email: event.target.value });
       };
     handleChangePassword = (event) => {
@@ -71,6 +76,7 @@ class Login extends Component {
                         <h4>Continue to Fundoo</h4>
                     </div>
                     <div className="emailLogin">
+                        
                         <TextField
                             required
                             id="outlined-required"
@@ -81,8 +87,9 @@ class Login extends Component {
                             onChange={this.handleChangeEmail}
                             // fullWidth
                         />
-                    </div>
-                    <div className="passwordLogin">
+                        <br></br>
+                    {/* </div>
+                    <div className="passwordLogin"> */}
                         <TextField
                             id="outlined-adornment-password"
                             // fullWidth

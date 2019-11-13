@@ -1,40 +1,38 @@
 import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import './VerifyUser.css'
+import "../CssFiles/VerifyUser.css";
+import { ValidateUser } from "./Service";
 
 class VerifyUser extends Component {
   VerifyHandler = () => {
-    this.props.history.push("/Login");
+    let token = this.props.match.params.token;
+    ValidateUser(token).then(respose => {
+      console.log(respose);
+      this.props.history.push("/Login");
+    }).catch(err=>{
+      console.log('token not matched')
+    });
+    
   };
+
   render() {
     return (
       <Card className="myCard">
         <div className="mainDiv">
           <div>
-            <h3 className="text">
+            <h2 className="text">
               <span style={{ color: "red" }}>F</span>
               <span style={{ color: "blue" }}>u</span>
               <span style={{ color: "brown" }}>n</span>
               <span style={{ color: "pink" }}>D</span>
               <span style={{ color: "green" }}>o</span>
               <span>o</span>
-            </h3>
-            <h3>Verify Yourself</h3>
+            </h2>
+            <h4>Verify Yourself</h4>
             <h4>Continue to Fundoo</h4>
           </div>
-          <div className="emailLoginVerify">
-            <TextField
-              required
-              id="outlined-required"
-              label="Enter Code sent on email"
-              margin="normal"
-              variant="outlined"
-              fullWidth
-            />
-          </div>
-          <br></br>
+
           <div className="buttonVerify">
             <Button
               variant="contained"

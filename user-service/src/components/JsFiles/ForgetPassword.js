@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
-import './ForgetPasswordStyle.css'
+import '../CssFiles/ForgetPasswordStyle.css'
 
 export class ForgetPassword extends Component {
     handleForgetPassword=()=>{

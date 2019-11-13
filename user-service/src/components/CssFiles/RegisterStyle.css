@@ -1,0 +1,128 @@
+.registerMainDiv {
+    /* width: 1200px; */
+    padding-left: 15%;
+    padding-right: 25%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    display: flex;
+    justify-content: center;
+
+    @media (max-width: 400px) {
+        flex-direction: column;
+        padding-left: 0%;
+        padding-right: 0%;
+        padding-top: 0%;
+        padding-bottom: 0%;
+    }
+}
+
+.card {
+    /* padding-left: 10%;*/
+    /* padding-right: 10%;  */
+    padding-top: 5%;
+    /* padding-bottom: 10%; */
+    display: flex;
+    flex-direction: row;
+
+    @media (max-width: 400px) {
+        flex-direction: column;
+        padding-left: 0%;
+        padding-right: 0%;
+        padding-top: 0%;
+        padding-bottom: 0%;
+    }
+
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.userInputs {
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 90%;
+}
+
+.headers {
+    display: flex;
+    justify-content: flex-start;
+    /* padding-left: 5%; */
+    flex-direction: column;
+    text-align: start;
+    padding-bottom: 10%;
+
+}
+
+.name {
+    display: flex;
+    flex-direction: row;
+
+    @media (max-width: 400px) {
+        flex-direction: column;
+    }
+
+    padding-top: 5%;
+    padding-bottom: 5%;
+    /* width: 90%; */
+    justify-content: space-between;
+}
+
+.password {
+    display: flex;
+    flex-direction: row;
+
+    @media (max-width: 400px) {
+        flex-direction: column;
+    }
+
+    padding-bottom: 5%;
+    padding-top: 5%;
+    /* width: 90%; */
+    justify-content: space-between;
+}
+
+.email {
+    width: 90%;
+    /* padding-left: 5%;
+   padding-right: 20%; */
+}
+
+.image {
+    /* width: 35%; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 5%;
+}
+
+.registerButton {
+    padding-right: 10%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.passwordEye {
+    /* padding-left: 1%; */
+    width: 40%;
+}
+
+.firstname {
+    /* padding-left: 6%; */
+    width: 43%;
+}
+
+.lastname {
+    width: 65%;
+}
+
+.passwordWithoutEye {
+    padding-right: 10%;
+    width: 40%;
+}
+
+.eyeIconRegister {
+    width: 1px;
+}
