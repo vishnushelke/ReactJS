@@ -9,7 +9,7 @@ class VerifyUser extends Component {
     let token = this.props.match.params.token;
     ValidateUser(token).then(respose => {
       console.log(respose);
-      this.props.history.push("/Login");
+      this.props.history.push("/");
     }).catch(err=>{
       console.log('token not matched')
     });

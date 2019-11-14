@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 
 class ResetPassword extends Component {
     handleResetPassword = () => {
-    this.props.history.push("/Login");
+    this.props.history.push("/");
   };
   render() {
     return (

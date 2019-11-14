@@ -1,128 +1,168 @@
 .registerMainDiv {
-    /* width: 1200px; */
-    padding-left: 15%;
-    padding-right: 25%;
-    padding-top: 5%;
-    padding-bottom: 5%;
     display: flex;
     justify-content: center;
-
-    @media (max-width: 400px) {
-        flex-direction: column;
-        padding-left: 0%;
-        padding-right: 0%;
-        padding-top: 0%;
-        padding-bottom: 0%;
-    }
+    max-width: 100%;
 }
 
 .card {
-    /* padding-left: 10%;*/
-    /* padding-right: 10%;  */
     padding-top: 5%;
-    /* padding-bottom: 10%; */
     display: flex;
-    flex-direction: row;
-
-    @media (max-width: 400px) {
-        flex-direction: column;
-        padding-left: 0%;
-        padding-right: 0%;
-        padding-top: 0%;
-        padding-bottom: 0%;
-    }
-
     justify-content: space-around;
     align-items: center;
-
+    max-width: 100%;
 }
 
 .userInputs {
     padding-left: 5%;
     padding-right: 5%;
-    width: 90%;
+    max-width: 100%;
 }
 
 .headers {
     display: flex;
     justify-content: flex-start;
-    /* padding-left: 5%; */
     flex-direction: column;
     text-align: start;
     padding-bottom: 10%;
-
+    max-width: 100%;
 }
 
 .name {
     display: flex;
     flex-direction: row;
-
-    @media (max-width: 400px) {
-        flex-direction: column;
-    }
-
     padding-top: 5%;
     padding-bottom: 5%;
-    /* width: 90%; */
     justify-content: space-between;
+    max-width: 100%;
 }
 
 .password {
     display: flex;
     flex-direction: row;
-
-    @media (max-width: 400px) {
-        flex-direction: column;
-    }
-
     padding-bottom: 5%;
     padding-top: 5%;
-    /* width: 90%; */
     justify-content: space-between;
+    max-width: 100%;
 }
 
 .email {
-    width: 90%;
-    /* padding-left: 5%;
-   padding-right: 20%; */
+    width: 100%;
+    max-width: 100%;
 }
 
 .image {
-    /* width: 35%; */
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     padding-right: 5%;
+    max-width: 100%;
 }
 
 .registerButton {
-    padding-right: 10%;
+
     display: flex;
     justify-content: space-between;
+    padding-right: 15%;
     padding-top: 10%;
     padding-bottom: 10%;
+    max-width: 100%;
+}
+.button{
+    width: 5%;
+}
+.link{
+    width: 5%;
 }
 
 .passwordEye {
-    /* padding-left: 1%; */
-    width: 40%;
+
+    width: 43%;
+    max-width: 100%;
 }
 
 .firstname {
-    /* padding-left: 6%; */
+
     width: 43%;
+    max-width: 100%;
 }
 
 .lastname {
-    width: 65%;
+    width: 43%;
+    max-width: 100%;
 }
 
 .passwordWithoutEye {
-    padding-right: 10%;
-    width: 40%;
+    width: 43%;
+    max-width: 100%;
 }
 
 .eyeIconRegister {
     width: 1px;
+    max-width: 100%;
+}
+@media (max-width:426px) {
+    .card{
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 0%;
+        padding-top: 0%;
+    }
+    .userInputs{
+        padding-left: 0%;
+        padding-right: 0%;
+        padding-top: 10%;
+        padding-bottom: 10%;
+    }
+    .headers{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        padding-bottom: 5%;
+    }
+    .name{
+        display: flex;
+        flex-direction: column;
+    }
+    .password{
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 0%;
+        padding-top: 0%;
+    }
+    .firstname{
+        
+        width: 400px;
+    }
+    .lastname{
+        width: 100%;
+    }
+    .passwordEye{
+        width: 100%;
+        justify-content: center;
+    }
+    .passwordWithoutEye{
+        display: flex;
+        justify-content: center;
+        padding-bottom: 0%;
+        width: 100%;
+    }
+    .email{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .image{
+        width: 0%;
+        height: 0%;
+        visibility: hidden;
+    }
+    .registerButton{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-right: 0%;
+        padding-bottom: 0%;
+    }
 }

@@ -3,7 +3,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import "../CssFiles/RegisterStyle.css";
-import { Link } from "@material-ui/core";
 import image from "../profile.png";
 import { RegisterUser } from "./Service";
 import IconButton from "@material-ui/core/IconButton";
@@ -73,7 +72,7 @@ class Register extends Component {
     }
   };
   LinkLoginHandler = () => {
-    this.props.history.push("/Login");
+    this.props.history.push("/");
   };
   handleClickShowPassword = () => {
     this.setState(state => ({ showPassword: !state.showPassword }));
@@ -111,6 +110,7 @@ class Register extends Component {
               <div className="firstname">
                 <TextField
                   required
+                  fullWidth
                   id="outlined-required"
                   name="firstname"
                   label="Firstname"
@@ -122,11 +122,12 @@ class Register extends Component {
               <div className="lastname">
                 <TextField
                   required
+                  fullWidth
                   id="outlined-required"
                   label="Lastname"
                   margin="dense"
                   variant="outlined"
-                  className="lastname"
+                  // className="lastname"
                   name="lastname"
                   onChange={this.handleChangeLastname}
                 />
@@ -149,6 +150,7 @@ class Register extends Component {
                 <TextField
                   id="outlined-adornment-password"
                   name="password"
+                  fullWidth
                   required
                   margin="dense"
                   variant="outlined"
@@ -177,6 +179,7 @@ class Register extends Component {
               <div className="passwordWithoutEye">
                 <TextField
                   required
+                  fullWidth
                   id="outlined-password-input"
                   label="Confirm-Password"
                   type="password"
@@ -191,6 +194,8 @@ class Register extends Component {
             <div className="registerButton">
               <Button
                 variant="contained"
+                fullWidth
+                className="button"
                 color="primary"
                 margin="dense"
                 type="submit"
@@ -198,7 +203,7 @@ class Register extends Component {
               >
                 Register
               </Button>
-              <Button onClick={this.LinkLoginHandler}>already registered?</Button>
+              <Button className="link" fullWidth onClick={this.LinkLoginHandler}>already registered?</Button>
             </div>
             <div></div>
           </div>
