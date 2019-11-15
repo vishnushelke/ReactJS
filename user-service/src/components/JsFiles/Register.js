@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import "../CssFiles/RegisterStyle.css";
-import image from "../profile.png";
+
 import { RegisterUser } from "./Service";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -21,7 +21,9 @@ class Register extends Component {
       firstname: "",
       lastname: "",
       email: "",
-      phonenumber: ""
+      phonenumber: "",
+      isValid: true,
+      error: {}
     };
   }
   handleChangeFirstname = event => {
@@ -46,29 +48,75 @@ class Register extends Component {
       confirmpassword: event.target.value
     });
   };
-  PasswordHandler = event => {
-    if (this.state.password !== this.state.confirmpassword) {
-      console.log("error");
-    } else {
+  handleValidation=(event)=>{
+
+    
+    let email=this.state.email
+    let password=this.state.password
+    let firstname=this.state.firstname
+    let lastname = this.state.lastname
+    let isValid = this.state.isValid
+    let error = this.state.error
+     
+
+    if(email===""){
+      console.log('email is null');
+      error["email"]="required"
+      isValid=false
+    }
+    if(password==="")
+    {
+      console.log('password is null')
+      error["password"]="required"
+      isValid=false
+    }
+    if(firstname==="")
+    {
+      console.log('firstname is null')
+      error["firstname"]="required"
+      isValid=false
+    }
+    if(lastname===""){
+      console.log('lastname is null')
+      error["lastname"]="required"
+      isValid=false
+    }
+    this.setState({
+        error:error
+    })
+    return isValid
+  }
+  PasswordHandler = (event) => {
+    event.preventDefault();
+    // this.state.firstname="";
+   
+    
       console.log("In service");
+      if (this.handleValidation() === true) {
+        let error=this.state.error
+        event.preventDefault();
+        if (this.state.password !== this.state.confirmpassword) {
+          console.log("error");
+          error["confirmpassword"]="both passwords must be same"
+        } else {
+        let registerDto = {};
 
-      let registerDto = {};
-
-      registerDto.firstname = this.state.firstname;
-      registerDto.lastname = this.state.lastname;
-      registerDto.email = this.state.email;
-      registerDto.phonenumber = this.state.phonenumber;
-      registerDto.confirmpassword = this.state.confirmpassword;
-      registerDto.password = this.state.password;
-      console.log("hi", registerDto);
-      RegisterUser(registerDto)
-        .then(registerDto => {
-          console.log(registerDto);
-          this.props.history.push("/VerifyUser");
-        })
-        .catch(err => {
-          console.log("errornew5r");
-        });
+        registerDto.firstname = this.state.firstname;
+        registerDto.lastname = this.state.lastname;
+        registerDto.email = this.state.email;
+        registerDto.phonenumber = this.state.phonenumber;
+        registerDto.confirmpassword = this.state.confirmpassword;
+        registerDto.password = this.state.password;
+        console.log("hi", registerDto);
+        RegisterUser(registerDto)
+          .then(registerDto => {
+            console.log(registerDto);
+            this.props.history.push("/VerifyUser");
+          })
+          .catch(err => {
+            console.log("errornew5r");
+          });
+      }
     }
   };
   LinkLoginHandler = () => {
@@ -118,6 +166,7 @@ class Register extends Component {
                   variant="outlined"
                   onChange={this.handleChangeFirstname}
                 />
+                <span style={{color:"red"}}>{this.state.error.firstname}</span>
               </div>
               <div className="lastname">
                 <TextField
@@ -127,10 +176,10 @@ class Register extends Component {
                   label="Lastname"
                   margin="dense"
                   variant="outlined"
-                  // className="lastname"
                   name="lastname"
                   onChange={this.handleChangeLastname}
                 />
+                 <span style={{color:"red"}}>{this.state.error.lastname}</span>
               </div>
             </div>
             <div className="email">
@@ -144,6 +193,7 @@ class Register extends Component {
                 name="email"
                 onChange={this.handleChangeEmail}
               />
+                <span style={{color:"red"}}>{this.state.error.email}</span>
             </div>
             <div className="password">
               <div className="passwordEye">
@@ -175,6 +225,7 @@ class Register extends Component {
                     )
                   }}
                 />
+                  <span style={{color:"red"}}>{this.state.error.password}</span>
               </div>
               <div className="passwordWithoutEye">
                 <TextField
@@ -188,6 +239,7 @@ class Register extends Component {
                   name="confirmpassword"
                   onChange={this.HandelConfirmPasswordChange}
                 />
+                 <span style={{color:"red"}}>{this.state.error.confirmpassword}</span>
               </div>
             </div>
 
@@ -203,13 +255,19 @@ class Register extends Component {
               >
                 Register
               </Button>
-              <Button className="link" fullWidth onClick={this.LinkLoginHandler}>already registered?</Button>
+              <Button
+                className="link"
+                fullWidth
+                onClick={this.LinkLoginHandler}
+              >
+                already registered?
+              </Button>
             </div>
             <div></div>
           </div>
           <div className="image">
             <img
-              src={image}
+              src={require('../../Assets/profile.png')}
               alt="imageNew"
               style={{ height: "150px", width: "150px" }}
             ></img>

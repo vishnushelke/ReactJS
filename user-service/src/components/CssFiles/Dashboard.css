@@ -1,3 +1,7 @@
+.rootDiv{
+    display: flex;
+    flex-direction: column;
+}
 .iconButton{
  display: flex;
  justify-content: flex-start;
@@ -8,6 +12,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     flex-direction: row;
+    /* align-content: center; */
 }
 .search{
     display: flex;
@@ -17,7 +22,7 @@
     margin-left: 10px;
 }
 .searchBar{
-    width: '500px';
+    /* width: '500px'; */
 }
 .refreshIcon{
     margin-right: 23px;
@@ -39,4 +44,10 @@ margin-right: 20px;
 }
 .appsIcon{
     margin-right: 23px;
+   
+}
+.rightSideIcons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
