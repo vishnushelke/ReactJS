@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { InputBase, Card } from "@material-ui/core";
-import AddNote from './AddNote';
 
 class AddNotePopper extends Component {
   render() {

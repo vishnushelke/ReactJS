@@ -111,7 +111,7 @@ class Register extends Component {
         RegisterUser(registerDto)
           .then(registerDto => {
             console.log(registerDto);
-            this.props.history.push("/VerifyUser");
+            this.props.history.push("/");
           })
           .catch(err => {
             console.log("errornew5r");

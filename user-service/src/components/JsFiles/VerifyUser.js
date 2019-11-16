@@ -7,6 +7,8 @@ import { ValidateUser } from "./Service";
 class VerifyUser extends Component {
   VerifyHandler = () => {
     let token = this.props.match.params.token;
+    console.log(token);
+    
     ValidateUser(token).then(respose => {
       console.log(respose);
       this.props.history.push("/");
