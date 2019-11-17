@@ -36,3 +36,20 @@ export function ResetPassword(setPasswordDto,token){
         }
     })
 }
+export function AddUserNote(createNoteDto,tokenUserId){
+    return axios.post('http://localhost:8080/user/notes',createNoteDto,{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId
+        }
+    })
+}
+
+export function GetAllNotes(tokenUserId){
+    return axios.get('http://localhost:8080/user/notes',{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId
+        }
+    })
+}

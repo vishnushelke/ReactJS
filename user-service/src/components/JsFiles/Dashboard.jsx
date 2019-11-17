@@ -13,6 +13,7 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import AccountInfo from "../JsFiles/AccountInfo";
 import MyDrawer from "./MyDrawer";
 import AddNote from "./AddNote";
+import DisplayAllNotes from "./DisplayAllNotes";
 
 const theme = createMuiTheme({
   overrides: {
@@ -95,10 +96,12 @@ handleAccountInfo=()=>{
             </Toolbar>
           </AppBar>
         </MuiThemeProvider>
-        <div style={{display:'flex',alignSelf:'center',alignItems:'center',paddingTop:'100px'}}>
+        <div style={{display:'flex',alignSelf:'center',alignItems:'center',paddingTop:'100px',paddingBottom:'50px'}}>
         <AddNote props={this.props}/>
         </div>
-        
+        <div>
+          <DisplayAllNotes/>
+        </div>
       </div>
     );
   }
