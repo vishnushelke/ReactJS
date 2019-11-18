@@ -52,3 +52,10 @@ export function GetAllNotes(tokenUserId){
         }
     })
 }
+export function GetAllLabels(tokenUserId){
+    return axios.get('http://localhost:8080/user/labels',{
+        headers:{
+            'tokenUserId':tokenUserId
+        }
+    })
+}

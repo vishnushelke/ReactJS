@@ -14,6 +14,7 @@ import AccountInfo from "../JsFiles/AccountInfo";
 import MyDrawer from "./MyDrawer";
 import AddNote from "./AddNote";
 import DisplayAllNotes from "./DisplayAllNotes";
+import AddLabel from "./AddLabel";
 
 const theme = createMuiTheme({
   overrides: {
@@ -98,6 +99,7 @@ handleAccountInfo=()=>{
         </MuiThemeProvider>
         <div style={{display:'flex',alignSelf:'center',alignItems:'center',paddingTop:'100px',paddingBottom:'50px'}}>
         <AddNote props={this.props}/>
+        <AddLabel />
         </div>
         <div>
           <DisplayAllNotes/>
