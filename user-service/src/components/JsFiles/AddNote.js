@@ -8,6 +8,7 @@ import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import ArchiveOutlinedIcon from "@material-ui/icons/ArchiveOutlined";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { AddUserNote } from "./Service";
+import DisplayAllNotes from "./DisplayAllNotes";
 
 class AddNote extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class AddNote extends Component {
       text: ""
     };
   }
+  
   handleAddNote = (event) => {
     this.clearForm()
     event.preventDefault()

@@ -25,7 +25,6 @@ function App() {
           <Route path='/AddNotePopper' component={AddNotePopper} />
         </Switch>
      </BrowserRouter>
-     {/* <Dashboard /> */}
     </div>
   );
 }

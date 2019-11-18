@@ -48,7 +48,6 @@ export function AddUserNote(createNoteDto,tokenUserId){
 export function GetAllNotes(tokenUserId){
     return axios.get('http://localhost:8080/user/notes',{
         headers:{
-            'Content-Type':'application/json;charset=utf-8',
             'tokenUserId':tokenUserId
         }
     })
