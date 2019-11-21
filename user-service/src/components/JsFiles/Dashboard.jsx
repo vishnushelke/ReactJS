@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  AppBar,
-  Toolbar,
-  InputBase,
-  Paper
-} from "@material-ui/core";
+import { AppBar, Toolbar, InputBase, Paper } from "@material-ui/core";
 import Fundoo from "../../Assets/images.jpeg";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import "../CssFiles/Dashboard.css";
@@ -14,7 +9,7 @@ import AccountInfo from "../JsFiles/AccountInfo";
 import MyDrawer from "./MyDrawer";
 import AddNote from "./AddNote";
 import DisplayAllNotes from "./DisplayAllNotes";
-import AddLabel from "./AddLabel";
+import { GetAllNotes } from "./Service";
 
 const theme = createMuiTheme({
   overrides: {
@@ -55,15 +50,32 @@ class PersistentDrawer extends Component {
 
     this.state = {
       anchorEl: null,
-      accountOpen:false
+      accountOpen: false,
+      notes: []
     };
   }
-handleAccountInfo=()=>{
-  
-  this.setState({
-    accountOpen:!this.state.accountOpen
-  })
-}
+  componentWillMount() {
+    this.getNotes();
+  }
+  getNotes = () => {
+    let tokenUserId =
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    GetAllNotes(tokenUserId)
+      .then(response => {
+        console.log(response.data.data);
+        this.setState({
+          notes: response.data.data.reverse()
+        });
+      })
+      .catch(err => {
+        console.log("token not matched");
+      });
+  };
+  handleAccountInfo = () => {
+    this.setState({
+      accountOpen: !this.state.accountOpen
+    });
+  };
   render() {
     return (
       <div className="rootDiv">
@@ -87,22 +99,29 @@ handleAccountInfo=()=>{
               </Paper>
 
               <div className="rightSideIcons">
-                <RefreshIcon style={{paddingTop:'5px',paddingRight:'48px'}} />
-                
+                <RefreshIcon
+                  style={{ paddingTop: "5px", paddingRight: "48px" }}
+                />
+
                 <AccountInfo props={this.props} />
-                <div>
-                </div>
                 
               </div>
             </Toolbar>
           </AppBar>
         </MuiThemeProvider>
-        <div style={{display:'flex',alignSelf:'center',alignItems:'center',paddingTop:'100px',paddingBottom:'50px'}}>
-        <AddNote props={this.props}/>
-        <AddLabel />
+        <div
+          style={{
+            display: "flex",
+            alignSelf: "center",
+            alignItems: "center",
+            paddingTop: "100px",
+            paddingBottom: "50px"
+          }}
+        >
+          <AddNote props={this.props} refresh={this.getNotes} />
         </div>
         <div>
-          <DisplayAllNotes/>
+          <DisplayAllNotes notes={this.state.notes} refresh={this.getNotes} />
         </div>
       </div>
     );

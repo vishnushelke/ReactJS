@@ -5,38 +5,72 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Popper,
-  TextField
+  TextField,
+  Button
 } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
-
+import { AddUserLabel } from "./Service";
+import "../CssFiles/Dashboard.css";
 class AddLabel extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
+      labelName: "",
+      error: {},
+      labels: []
     };
+  }
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      labels: newProps.labels
+    });
   }
   handleAddLbel = () => {
     console.log(this.state.open, " open");
 
     this.setState({
-      open: !this.state.open
+      open: true
     });
     // console.log(this.state.open);
   };
-  handelLabelName = event => {
-    console.log(event.target.value);
+  handleCloseDialog = () => {
+    console.log("close button response", this.state.open);
 
+    this.setState({
+      open: false
+    });
+  };
+  handelLabelName = event => {
     this.setState({
       labelName: event.target.value
     });
   };
+  handelAddLabel = () => {
+    let addLabelDto = {};
+    let tokenUserId =
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    addLabelDto.name = this.state.labelName;
+
+    console.log(addLabelDto, tokenUserId);
+
+    AddUserLabel(addLabelDto, tokenUserId)
+      .then(response => {
+        console.log("into add label result");
+        console.log(response);
+        this.props.refresh();
+      })
+      .catch(err => {
+        console.log("error while creating label");
+        this.setState({
+          error: err
+        });
+      });
+  };
 
   render() {
     let open = this.state.open;
-    let id = open ? "simple-popper" : null;
     return (
       <div>
         <ListItem button key="Editlabels" onClick={this.handleAddLbel}>
@@ -53,15 +87,50 @@ class AddLabel extends Component {
           </ListItemIcon>
           <ListItemText primary="Edit labels" />
         </ListItem>
-        <div>
-          <Dialog open={open} onClose={this.handleAddLbel}>
+        <div
+          style={{ display: "flex", alignContent: "center", padding: "10px" }}
+        >
+          <Dialog
+            open={open}
+            onClose={this.handleAddLbel}
+            style={{
+              width: "550px",
+              paddingBottom: "50px"
+              // paddingLeft: "10px"
+            }}
+          >
             <DialogTitle>Edit Labels</DialogTitle>
-            <div style={{display:'flex',flexDirection:'row'}}>
+            <div style={{ display: "flex", flexDirection: "row" }}>
               <TextField
                 placeholder="Create new Label"
                 onChange={this.handelLabelName}
+                fullWidth
+                name="labelName"
+                style={{ paddingLeft: "10px" }}
               ></TextField>
-              <CheckIcon />
+              <CheckIcon
+                onClick={this.handelAddLabel}
+                style={{ paddingRight: "10px" }}
+              />
+              <br></br>
+            </div>
+            <div className="LabelAlign">
+              {this.state.labels.map((text,index)=>(
+                <TextField defaultValue={text.name} />
+              ))}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                paddingRight: "10px",
+                paddingBottom: "10px",
+                paddingTop: "10px"
+              }}
+            >
+              <Button onClick={this.handleCloseDialog} style={{ width: "10%" }}>
+                Close
+              </Button>
             </div>
           </Dialog>
         </div>

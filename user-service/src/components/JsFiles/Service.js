@@ -59,3 +59,34 @@ export function GetAllLabels(tokenUserId){
         }
     })
 }
+export function AddUserLabel(addLabelDto,tokenUserId){    
+    return axios.post('http://localhost:8080/user/labels',addLabelDto,{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId
+        }
+    })
+}
+export function EditUserNote(updateNoteDto,tokenUserId,noteId){    
+    return axios.put('http://localhost:8080/user/notes',updateNoteDto,{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId,
+            'noteId':noteId
+        }
+    })
+}
+export function ColorUserNote(noteId,colourHashcode,tokenUserId){  
+console.log(typeof noteId);
+console.log(noteId);
+
+
+    return axios.put('http://localhost:8080/user/notes/setcolour',{},{
+        headers:{      
+            'Content-Type':'application/json;charset=utf-8',    
+            'noteId':noteId,
+            'colourHashcode':colourHashcode,
+            'tokenUserId':tokenUserId
+        }
+    })
+}

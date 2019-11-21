@@ -56,7 +56,6 @@ class AccountInfo extends Component {
             alignContent: "center"
           }}
         >
-          <Card>
             <Popper
               id={id}
               open={open}
@@ -117,7 +116,6 @@ class AccountInfo extends Component {
                 </DialogContent>
               </Paper>
             </Popper>
-          </Card>
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { InputBase, Card, IconButton } from "@material-ui/core";
+import { InputBase, Card, IconButton, Tooltip } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import AddAlertOutlinedIcon from "@material-ui/icons/AddAlertOutlined";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
@@ -19,27 +19,32 @@ class AddNote extends Component {
       text: ""
     };
   }
-  
-  handleAddNote = (event) => {
-    this.clearForm()
-    event.preventDefault()
+
+  handleAddNote = event => {
+    this.clearForm();
+    event.preventDefault();
     this.setState({ createState: !this.state.createState });
-    let tokenUserId =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
-    let addNoteDto = {};
-    addNoteDto.title = this.state.title;
-    addNoteDto.text = this.state.text;
-    console.log(addNoteDto);
-    console.log(tokenUserId);
+    this.refreshNotes()
     this.refs.clearTitle.value = "";
     this.refs.clearText.value = "";
 
+    
+  };
+  refreshNotes=()=>{
+    let addNoteDto = {};
+    addNoteDto.title = this.state.title;
+    addNoteDto.text = this.state.text;
+    let tokenUserId =
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
     AddUserNote(addNoteDto, tokenUserId)
-      .then(console.log("note added successfully"))
+      .then(()=>{console.log("note added successfully")
+      this.props.refresh();
+    })
       .catch(err => {
         console.log("error in adding note");
       });
-  };
+  }
+  
   handleTextChange = event => {
     this.setState({
       text: event.target.value
@@ -53,13 +58,14 @@ class AddNote extends Component {
   handleTransition = () => {
     this.setState({ createState: !this.state.createState });
   };
-  clearForm=()=>{
+  clearForm = () => {
     document.getElementById("addNoteForm").reset();
     this.setState({
-      text:'',
-      title:''
-    })
-  }
+      text: "",
+      title: ""
+    });
+  };
+
   render() {
     return (
       <form id="addNoteForm">
@@ -85,6 +91,7 @@ class AddNote extends Component {
                   onChange={this.handleTitleChange}
                   style={{ padding: "1%", paddingLeft: "4%", width: "650px" }}
                 />
+
                 <InputBase
                   placeholder="take a note"
                   name="text"
@@ -96,32 +103,33 @@ class AddNote extends Component {
                 <div
                   style={{
                     display: "flex",
-                    alignItems: "start",
-                    paddingRight: "13px",
-                    justifyContent: "space-between"
+                    flexWrap: "wrap",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingTop: "10px"
                   }}
                 >
-                  <div>
-                    <IconButton label="Reminder">
-                      <AddAlertOutlinedIcon />
-                    </IconButton>
-                    <IconButton>
-                      <PersonAddOutlinedIcon />
-                    </IconButton>
-                    <IconButton>
-                      <ColorLensOutlinedIcon />
-                    </IconButton>
-                    <IconButton>
-                      <ImageOutlinedIcon />
-                    </IconButton>
-                    <IconButton>
-                      <ArchiveOutlinedIcon />
-                    </IconButton>
-                    <IconButton>
-                      <MoreVertIcon />
-                    </IconButton>
+                  <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around',width:'300px'}}>
+                  <Tooltip title="reminder">
+                    <AddAlertOutlinedIcon style={{ width: "20px" }} />
+                    </Tooltip>
+                    <Tooltip title="collaborator">
+                    <PersonAddOutlinedIcon style={{ width: "20px" }} />
+                    </Tooltip>
+                    <Tooltip title="change color">
+                    <ColorLensOutlinedIcon style={{ width: "20px" }} />
+                    </Tooltip>
+                    <Tooltip title="add image">
+                    <ImageOutlinedIcon style={{ width: "20px" }} />
+                    </Tooltip>
+                    <Tooltip title="archive">
+                    <ArchiveOutlinedIcon style={{ width: "20px" }} />
+                    </Tooltip>
+                    <Tooltip title="more">
+                    <MoreVertIcon style={{ width: "20px" }} />
+                    </Tooltip>
                   </div>
-                  <Button onClick={this.handleAddNote}>Close</Button>
+                  <Button onClick={this.handleAddNote} refresh={this.refreshNotes}>Close</Button>
                 </div>
               </Card>
             </div>
