@@ -69,8 +69,7 @@ class AddColor extends Component {
     this.state = {
       open: false,
       anchorEl: null,
-      note:{},
-      noteId:1
+      note:{}
     };
   }
  
@@ -85,8 +84,6 @@ class AddColor extends Component {
       });
   }
   setColor=(color)=>{
-      console.log(color);
-      // console.log(this.props.note);
       
       let noteId=this.props.note.noteId; 
       let tokenUserId = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";

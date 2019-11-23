@@ -5,11 +5,12 @@ import AddAlertOutlinedIcon from "@material-ui/icons/AddAlertOutlined";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
-import ArchiveOutlinedIcon from "@material-ui/icons/ArchiveOutlined";
+
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import EditNote from "./EditNote";
 import AddColor from "../AddColor";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import ArchiveNote from "./ArchiveNote";
 const theme = createMuiTheme({
   overrides: {
     MuiPaper: {
@@ -93,7 +94,7 @@ class DisplayAllNotes extends Component {
                   value={text.title}
                   InputProps={{ disableUnderline: true }}
                   style={{ paddingLeft: "10px" }}
-                  // onClick={this.handelNoteSave(text)}
+                  
                 />
 
                 <TextField
@@ -115,9 +116,7 @@ class DisplayAllNotes extends Component {
                     <Tooltip title="add image">
                     <ImageOutlinedIcon style={{ width: "20px" }} />
                     </Tooltip>
-                    <Tooltip title="archive">
-                    <ArchiveOutlinedIcon style={{ width: "20px" }} />
-                    </Tooltip>
+                   <ArchiveNote note={text} refresh={this.props.refresh}/>
                     <Tooltip title="more">
                     <MoreVertIcon style={{ width: "20px" }} />
                     </Tooltip>

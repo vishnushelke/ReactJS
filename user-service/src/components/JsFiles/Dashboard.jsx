@@ -9,7 +9,7 @@ import AccountInfo from "../JsFiles/AccountInfo";
 import MyDrawer from "./MyDrawer";
 import AddNote from "./AddNote";
 import DisplayAllNotes from "./DisplayAllNotes";
-import { GetAllNotes } from "./Service";
+import { GetAllNotes, GetArchivedUserNote } from "./Service";
 
 const theme = createMuiTheme({
   overrides: {
@@ -71,11 +71,44 @@ class PersistentDrawer extends Component {
         console.log("token not matched");
       });
   };
+  handelArchivedNotes=()=>{
+    let tokenUserId='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34'
+    GetArchivedUserNote(tokenUserId).then(response=>{
+      console.log('archived notes fetched successfully');
+      console.log(response.data.data);
+      
+    }).catch(err=>{
+      console.log('archived notes fetch fail');
+      
+    })
+  }
   handleAccountInfo = () => {
     this.setState({
       accountOpen: !this.state.accountOpen
     });
   };
+  handleCurrentClick=(currentState)=>{
+    if(currentState.allNote===true)
+    {
+      console.log('all notes clicked');
+      
+    }
+    else if(currentState.archiveNote===true)
+    {
+      console.log('archived notes clicked');
+      
+    }
+    else if(currentState.trashNote===true)
+    {
+      console.log('trshed notes clicked');
+      
+    }
+    else if(currentState.reminder===true)
+    {
+      console.log('reminder notes clicked');
+      
+    }
+  }
   render() {
     return (
       <div className="rootDiv">
@@ -83,7 +116,7 @@ class PersistentDrawer extends Component {
           <AppBar position="fixed" className="AppBar" color="default">
             <Toolbar>
               <div className="nameIcon">
-                <MyDrawer />
+                <MyDrawer currentClick={this.handleCurrentClick}/>
                 <img src={Fundoo} alt="logo" className="image" />
                 <h3>FundooNotes</h3>
               </div>

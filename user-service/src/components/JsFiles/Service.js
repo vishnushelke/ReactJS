@@ -77,16 +77,64 @@ export function EditUserNote(updateNoteDto,tokenUserId,noteId){
     })
 }
 export function ColorUserNote(noteId,colourHashcode,tokenUserId){  
-console.log(typeof noteId);
-console.log(noteId);
-
-
     return axios.put('http://localhost:8080/user/notes/setcolour',{},{
         headers:{      
             'Content-Type':'application/json;charset=utf-8',    
             'noteId':noteId,
             'colourHashcode':colourHashcode,
             'tokenUserId':tokenUserId
+        }
+    })
+}
+export function TrashUserNote(noteId,tokenUserId){  
+    return axios.put('http://localhost:8080/user/notes/trash',{},{
+        headers:{      
+            'Content-Type':'application/json;charset=utf-8',    
+            'noteId':noteId,
+            'tokenUserId':tokenUserId
+        }
+    })
+}
+export function ArchiveUserNote(noteId,tokenUserId){  
+    return axios.put('http://localhost:8080/user/notes/archive',{},{
+        headers:{      
+            'Content-Type':'application/json;charset=utf-8',    
+            'noteId':noteId,
+            'tokenUserId':tokenUserId
+        }
+    })
+}
+export function GetTrashedUserNote(tokenUserId){    
+    return axios.get('http://localhost:8080/user/notes/trashednotes',{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId
+        }
+    })
+}
+export function GetArchivedUserNote(tokenUserId){    
+    return axios.get('http://localhost:8080/user/notes/archivednotes',{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId
+        }
+    })
+}
+export function GetUserNoteOfLabel(labelId,tokenUserId){    
+    return axios.get('http://localhost:8080/user/labels/archivednotes',{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId,
+            'labelId':labelId
+        }
+    })
+}
+export function AddNoteToLabel(noteId,labelId,tokenUserId){    
+    return axios.get('http://localhost:8080/user/notes/addtolabel',{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId,
+            'labelId':labelId
         }
     })
 }
