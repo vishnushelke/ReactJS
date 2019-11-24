@@ -53,7 +53,7 @@ class MyDrawer extends Component {
       .catch(err => {
         console.log("error while fetching labels");
       });
-  };
+  }; 
   
 
   handleDrawer = event => {
@@ -63,30 +63,35 @@ class MyDrawer extends Component {
       open: !this.state.open
     });
   };
-
+ handelAllNotes=()=>{
+   let currentState={
+     allNote:true,
+     archiveNote:false,
+     trashNote:false
+   }
+   this.props.currentClick(currentState)
+ }
   handelArchivedNotes=()=>{
     let currentState={
-      archiveNote:true,
       allNote:false,
+      archiveNote:true,
       trashNote:false
     }
-    this.props.currentClick(currentState)
-  }
-  handelAllNotes=()=>{
-    let currentState={
-      archiveNote:false,
-      allNote:true,
-      trashNote:false
-    }
+    console.log(this.props);
     this.props.currentClick(currentState)
   }
   handelTrashedNotes=()=>{
     let currentState={
-      archiveNote:false,
       allNote:false,
+      archiveNote:false,
       trashNote:true
     }
     this.props.currentClick(currentState)
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log('kuch',nextProps);
+    
   }
   render() {
     let open = this.state.open;

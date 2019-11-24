@@ -31,14 +31,13 @@ class Login extends Component {
     if(email==="")
     {
         isValid='false'
-        console.log('error in emailID1231 '+isValid);
-        error["email"]="email can not be empty"
+        error["email"]="required"
     }
     if(password==="")
     {
         isValid='false'
         console.log('error in password');
-        error["password"]="password can not be empty"
+        error["password"]="required"
     }
     this.setState({
         error:error
@@ -62,7 +61,7 @@ class Login extends Component {
       LoginUser(loginDto)
         .then(response => {
           console.log(response);
-          this.props.history.push("/Dashboard");
+          this.props.history.push("/dashboard/notes");
         })
         .catch(err => {
           console.log("error");

@@ -21,14 +21,14 @@ export function ValidateUser(token){
         }
     })
 }
-export function ForgetPassword(forgetDto){
+export function ForgetUserPassword(forgetDto){
     return axios.put('http://localhost:8080/user/forgetpassword',forgetDto,{
         headers:{
             'Content-Type':'application/json;charset=utf-8'
         }
     })
 }
-export function ResetPassword(setPasswordDto,token){
+export function ResetUserPassword(setPasswordDto,token){
     return axios.put('http://localhost:8080/user/resetpassword',setPasswordDto,{
         headers:{
             'Content-Type':'application/json;charset=utf-8',
@@ -135,6 +135,15 @@ export function AddNoteToLabel(noteId,labelId,tokenUserId){
             'Content-Type':'application/json;charset=utf-8',
             'tokenUserId':tokenUserId,
             'labelId':labelId
+        }
+    })
+}
+export function ForeverDeleteUserNote(noteId,tokenUserId){    
+    return axios.delete('http://localhost:8080/user/notes',{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId,
+            'noteId':noteId
         }
     })
 }
