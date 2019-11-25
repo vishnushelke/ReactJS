@@ -51,7 +51,7 @@ class MoreIcon extends Component {
                 <TrashNote
                   note={note}
                   refresh={this.props.refresh}
-                  onClick={this.close}
+                  close={this.close}
                 />
               </div>
               <div>

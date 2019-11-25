@@ -81,6 +81,7 @@ class EditNote extends Component {
             defaultValue={this.state.title}
             InputProps={{ disableUnderline: true }}
             onChange={this.handleTitle}
+            multiline
           >
             {this.state.title}
           </TextField>
@@ -89,6 +90,7 @@ class EditNote extends Component {
             defaultValue={this.state.text}
             InputProps={{ disableUnderline: true }}
             onChange={this.handleText}
+            multiline
           >
             {this.state.text}
           </TextField>

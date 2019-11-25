@@ -6,13 +6,14 @@ import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 
-
 import EditNote from "./EditNote";
 import AddColor from "../AddColor";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import MoreIcon from './MoreIcon'
+import MoreIcon from "./MoreIcon";
 import { GetArchivedUserNote } from "./Service";
 import UnarchiveNote from "./UnarchiveNote";
+import Masonry from "react-masonry-component";
+import AddReminder from "./AddReminder";
 
 const theme = createMuiTheme({
   overrides: {
@@ -20,10 +21,14 @@ const theme = createMuiTheme({
       root: {
         width: "400px"
       }
+    },
+    MuiInputBase: {
+      root: {
+        width: "90%"
+      }
     }
   }
 });
-
 class DisplayArchiveNotes extends Component {
   constructor(props) {
     super(props);
@@ -84,67 +89,76 @@ class DisplayArchiveNotes extends Component {
             display: "flex",
             width: "850px",
             justifyContent: "space-around",
-            flexWrap: "wrap"
+            flexDirection: "column"
           }}
         >
           <MuiThemeProvider theme={theme}>
-            {notes.map(text => (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "wrap"
-                }}
-              >
-                <Card
-                  style={{
-                    maxWidth: "250px",
-                    minHeight: "100px",
-                    textAlign: "start",
-                    margin: "10px",
-                    backgroundColor: text.colour
-                  }}
-                >
-                  <div onClick={() => this.handleEditNote(text)}>
-                    <TextField
-                      disabled
-                      value={text.title}
-                      InputProps={{ disableUnderline: true }}
-                      style={{ paddingLeft: "10px" }}
-                    />
-
-                    <TextField
-                      disabled
-                      value={text.text}
-                      InputProps={{ disableUnderline: true }}
-                      style={{ paddingLeft: "10px" }}
-                    />
-                  </div>
-                  <div
+            <Masonry
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap"
+              }}
+            >
+              {notes.map(text => (
+                <div>
+                  <Card
                     style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      flexDirection: "row",
-                      justifyContent: "space-around",
-                      paddingTop: "10px"
+                      maxWidth: "250px",
+                      minHeight: "100px",
+                      textAlign: "start",
+                      margin: "10px",
+                      backgroundColor: text.colour,
+                      borderRadius: "15px"
                     }}
                   >
-                    <Tooltip title="reminder">
-                      <AddAlertOutlinedIcon style={{ width: "20px" }} />
-                    </Tooltip>
-                    <Tooltip title="collaborator">
-                      <PersonAddOutlinedIcon style={{ width: "20px" }} />
-                    </Tooltip>
-                    <AddColor note={text} refresh={this.handelArchivedNotes} />
-                    <Tooltip title="add image">
-                      <ImageOutlinedIcon style={{ width: "20px" }} />
-                    </Tooltip>
-                    <UnarchiveNote refresh={this.handelArchivedNotes} note={text}/>
-                    <MoreIcon note={text} refresh={this.handelArchivedNotes}/>
-                  </div>
-                </Card>
-              </div>
-            ))}
+                    <div onClick={() => this.handleEditNote(text)}>
+                      <TextField
+                        multiline
+                        disabled
+                        value={text.title}
+                        InputProps={{ disableUnderline: true }}
+                        style={{ paddingLeft: "10px" }}
+                      />
+
+                      <TextField
+                        multiline
+                        disabled
+                        value={text.text}
+                        InputProps={{ disableUnderline: true }}
+                        style={{ paddingLeft: "10px" }}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        flexDirection: "row",
+                        justifyContent: "space-around",
+                        paddingTop: "10px"
+                      }}
+                    >
+                      <AddReminder note={text} refresh={this.getNotes} />
+                      <Tooltip title="collaborator">
+                        <PersonAddOutlinedIcon style={{ width: "20px" }} />
+                      </Tooltip>
+                      <AddColor
+                        note={text}
+                        refresh={this.handelArchivedNotes}
+                      />
+                      <UnarchiveNote
+                        refresh={this.handelArchivedNotes}
+                        note={text}
+                      />
+                      <MoreIcon
+                        note={text}
+                        refresh={this.handelArchivedNotes}
+                      />
+                    </div>
+                  </Card>
+                </div>
+              ))}
+            </Masonry>
           </MuiThemeProvider>
         </div>
         <EditNote

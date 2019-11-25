@@ -15,7 +15,10 @@ class AddNote extends Component {
     this.state = {
       createState: true,
       title: "",
-      text: ""
+      text: "",
+      color:"",
+      archive:false,
+      trash:false
     };
   }
 
@@ -31,6 +34,7 @@ class AddNote extends Component {
     let addNoteDto = {};
     addNoteDto.title = this.state.title;
     addNoteDto.text = this.state.text;
+    addNoteDto.color = this.state.color;
     let tokenUserId =
       "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
     AddUserNote(addNoteDto, tokenUserId)
@@ -69,25 +73,29 @@ class AddNote extends Component {
       <form id="addNoteForm">
         <div>
           {this.state.createState ? (
-            <div style={{ paddingLeft: "15%" }}>
-              <Card>
+            <div style={{ paddingLeft: "15%",width: "550px" }}>
+              <Card
+                style={{
+                  borderRadius: "5px",width: "550px"
+                }}
+              >
                 <InputBase
                   placeholder="take a note"
-                  style={{ padding: "1%", paddingLeft: "4%", width: "650px" }}
+                  style={{ padding: "1%", paddingLeft: "4%", width: "550px" }}
                   ref="clearText"
                   onClick={this.handleTransition}
                 />
               </Card>
             </div>
           ) : (
-            <div style={{ paddingLeft: "15%" }}>
-              <Card style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ paddingLeft: "15%",width: "550px" }}>
+              <Card style={{ display: "flex", flexDirection: "column", borderRadius: "10px",width: "550px" }}>
                 <InputBase
                   placeholder="title"
                   name="title"
                   ref="clearTitle"
                   onChange={this.handleTitleChange}
-                  style={{ padding: "1%", paddingLeft: "4%", width: "650px" }}
+                  style={{ padding: "1%", paddingLeft: "4%", width: "550px" }}
                 />
 
                 <InputBase
@@ -95,7 +103,7 @@ class AddNote extends Component {
                   name="text"
                   ref="clearText"
                   onChange={this.handleTextChange}
-                  style={{ padding: "1%", paddingLeft: "4%", width: "650px" }}
+                  style={{ padding: "1%", paddingLeft: "4%", width: "550px" }}
                 />
 
                 <div
@@ -123,9 +131,6 @@ class AddNote extends Component {
                     </Tooltip>
                     <Tooltip title="change color" refresh={this.refreshNotes}>
                       <ColorLensOutlinedIcon style={{ width: "20px" }} />
-                    </Tooltip>
-                    <Tooltip title="add image">
-                      <ImageOutlinedIcon style={{ width: "20px" }} />
                     </Tooltip>
                     <Tooltip title="archive">
                       <ArchiveOutlinedIcon style={{ width: "20px" }} />

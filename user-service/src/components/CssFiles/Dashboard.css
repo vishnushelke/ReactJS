@@ -20,12 +20,14 @@
     justify-content: center;
     margin-right: 30px;
     margin-left: 10px;
+    padding-top: 5px;
 }
 .searchBar{
-    /* width: '500px'; */
+    width: '550px';
 }
 .refreshIcon{
     margin-right: 23px;
+    /* padding-top: 10%; */
 }
 .accountCircleIcon{
 margin-right: 20px;
@@ -33,6 +35,8 @@ margin-right: 20px;
 .searchClass{
     display: flex;
     justify-content: center;
+    width: 550px;
+    padding-top: 1%;
 }
 .image{
     height: 50px;

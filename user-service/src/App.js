@@ -19,7 +19,7 @@ function App() {
         <switch>      
           <Route path='/' exact={true} component={Login} />
           <Route path='/Dashboard' component={Dashboard} />
-          <Route path="/dashboard/notes" component={DisplayAllNotes} />
+          <Route path="/Dashboard/notes" component={DisplayAllNotes} />
           <Route path='/Dashboard/archivenotes'  component={DisplayArchiveNotes} />
           <Route path='/Dashboard/trashnotes' component={DisplayTrashedNote} />       
           <Route path='/ForgetPassword' component={ForgetPassword} />

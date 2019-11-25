@@ -104,7 +104,7 @@ class MyDrawer extends Component {
           <div style={{ textAlign: "initial" }}>
             <Drawer variant="persistent" anchor="left" open={open}>
               <List>
-                <ListItem onClick={this.handelAllNotes} button key="Notes">
+                <ListItem onClick={this.handelAllNotes} button key="Notes" style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
                   <ListItemIcon>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@ class MyDrawer extends Component {
                   <ListItemText primary="Notes" />
                 </ListItem>
 
-                <ListItem button key="Reminders">
+                <ListItem button key="Reminders" style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
                   <ListItemIcon>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +148,7 @@ class MyDrawer extends Component {
               <List>
                 <div>
                   {this.state.labels.map(label => (
-                    <ListItem button key={label.name}>
+                    <ListItem button key={label.name} style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
                       <ListItemIcon>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +168,7 @@ class MyDrawer extends Component {
               </List>
               <Divider></Divider>
               <List>
-                <ListItem onClick={this.handelArchivedNotes} button key="Archive">
+                <ListItem onClick={this.handelArchivedNotes} button key="Archive" style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
                   <ListItemIcon>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +182,7 @@ class MyDrawer extends Component {
                   </ListItemIcon>
                   <ListItemText primary="Archive" />
                 </ListItem>
-                <ListItem onClick={this.handelTrashedNotes} button key="Trash">
+                <ListItem onClick={this.handelTrashedNotes} button key="Trash" style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
                   <ListItemIcon>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

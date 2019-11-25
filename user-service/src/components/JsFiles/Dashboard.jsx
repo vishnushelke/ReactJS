@@ -68,14 +68,14 @@ class PersistentDrawer extends Component {
     if (currentState.allNote === true) {
       console.log("sdfasdgdfgsdfg");
 
-      this.props.history.push("/dashboard/notes");
+      this.props.history.push("/Dashboard/notes");
     } else if (currentState.archiveNote === true) {
       console.log('archive');
       
       this.props.history.push("/Dashboard/archivenotes");
     } else if (currentState.trashNote === true) {
       this.props.history.push('/Dashboard/trashnotes')
-      console.log("trshed notes clicked");
+      console.log("trashed notes clicked");
     } else if (currentState.reminder === true) {
       console.log("reminder notes clicked");
     }
@@ -92,7 +92,7 @@ class PersistentDrawer extends Component {
                 <h3>FundooNotes</h3>
               </div>
 
-              <Paper>
+              <Paper style={{width:'550px'}}>
                 <div className="searchClass">
                   <div>
                     <SearchIcon className="search" />
@@ -104,7 +104,7 @@ class PersistentDrawer extends Component {
 
               <div className="rightSideIcons">
                 <RefreshIcon
-                  style={{ paddingTop: "5px", paddingRight: "48px" }}
+                  style={{ paddingTop: "12px", paddingRight: "48px" }}
                 />
 
                 <AccountInfo props={this.props} />

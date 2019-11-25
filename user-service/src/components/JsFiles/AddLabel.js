@@ -73,7 +73,7 @@ class AddLabel extends Component {
     let open = this.state.open;
     return (
       <div>
-        <ListItem button key="Editlabels" onClick={this.handleAddLbel}>
+        <ListItem button key="Editlabels" onClick={this.handleAddLbel} style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
           <ListItemIcon>
             <svg
               xmlns="http://www.w3.org/2000/svg"

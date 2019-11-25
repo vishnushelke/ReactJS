@@ -11,6 +11,7 @@ class TrashNote extends Component {
       .then(response => {
         console.log("note trashed successfully");
         this.props.refresh()
+        this.props.close()
       })
       .catch(err => {
         console.log("note trash fail");
