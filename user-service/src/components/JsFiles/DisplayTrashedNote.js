@@ -106,8 +106,8 @@ const theme = createMuiTheme({
                         width:'100px'
                       }}
                     >
-                      <DeleteForever note={text}/>
-                      <UntrashNote note={text} />
+                      <DeleteForever note={text} refresh={this.handelTrashedNotes}/>
+                      <UntrashNote note={text} refresh={this.handelTrashedNotes}/>
                     </div>
                   </Card>
                 </div>

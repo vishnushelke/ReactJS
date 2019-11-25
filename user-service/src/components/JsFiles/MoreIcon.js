@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import {
-  Popper,
-  Paper,
-  
-  Button
-} from "@material-ui/core";
-import TrashNote from './TrashNote'
+import { Popper, Paper, Button } from "@material-ui/core";
+import TrashNote from "./TrashNote";
 class MoreIcon extends Component {
   constructor(props) {
     super(props);
@@ -25,9 +20,15 @@ class MoreIcon extends Component {
       open: !this.state.open
     });
   };
-  
+  close = () => {
+    this.setState({
+      anchorEl: null,
+      open: false
+    });
+  };
+
   render() {
-    let note=this.props.note
+    let note = this.props.note;
     let open = this.state.open;
     const id = open ? "scroll-playground" : null;
     return (
@@ -39,13 +40,24 @@ class MoreIcon extends Component {
           />
         </div>
         <div>
-          <Popper id={id} open={open} anchorEl={this.state.anchorEl} style={{width:'50px'}}>
-            <Paper style={{width:'200px',textAlign:'left'}}>
-                <div>
-             <TrashNote note={note}/>
+          <Popper
+            id={id}
+            open={open}
+            anchorEl={this.state.anchorEl}
+            style={{ width: "50px" }}
+          >
+            <Paper style={{ width: "200px", textAlign: "left" }}>
+              <div>
+                <TrashNote
+                  note={note}
+                  refresh={this.props.refresh}
+                  onClick={this.close}
+                />
               </div>
               <div>
-              <Button fullWidth>Add Label</Button>
+                <Button fullWidth onClick={this.close}>
+                  Add Label
+                </Button>
               </div>
             </Paper>
           </Popper>

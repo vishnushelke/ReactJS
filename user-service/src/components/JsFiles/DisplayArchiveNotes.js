@@ -135,12 +135,12 @@ class DisplayArchiveNotes extends Component {
                     <Tooltip title="collaborator">
                       <PersonAddOutlinedIcon style={{ width: "20px" }} />
                     </Tooltip>
-                    <AddColor note={text} refresh={this.props.refresh} />
+                    <AddColor note={text} refresh={this.handelArchivedNotes} />
                     <Tooltip title="add image">
                       <ImageOutlinedIcon style={{ width: "20px" }} />
                     </Tooltip>
-                    <UnarchiveNote />
-                    <MoreIcon/>
+                    <UnarchiveNote refresh={this.handelArchivedNotes} note={text}/>
+                    <MoreIcon note={text} refresh={this.handelArchivedNotes}/>
                   </div>
                 </Card>
               </div>

@@ -10,6 +10,7 @@ class TrashNote extends Component {
     TrashUserNote(noteId, tokenUserId)
       .then(response => {
         console.log("note trashed successfully");
+        this.props.refresh()
       })
       .catch(err => {
         console.log("note trash fail");
@@ -18,7 +19,7 @@ class TrashNote extends Component {
   render() {
     return (
       <div>
-        <Button fullWidth onClick={this.handelAddToTrash}>
+        <Button fullWidth onClick={this.handelAddToTrash} style={{textAlign:'start'}}>
           Delete Note
         </Button>
       </div>

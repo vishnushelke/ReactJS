@@ -10,6 +10,7 @@ class DeleteForever extends Component {
     ForeverDeleteUserNote(noteId, tokenUserId)
       .then(response => {
         console.log("note delete success");
+        this.props.refresh()
       })
       .catch(err => {
         console.log("note delete fail");
