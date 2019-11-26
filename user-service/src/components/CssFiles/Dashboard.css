@@ -16,14 +16,16 @@
 }
 .search{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center;
+    justify-content: center; */
+
     margin-right: 30px;
     margin-left: 10px;
-    padding-top: 5px;
+    /* padding-top: 5px; */
 }
 .searchBar{
     width: '550px';
+    height:'40px';
 }
 .refreshIcon{
     margin-right: 23px;
@@ -36,7 +38,9 @@ margin-right: 20px;
     display: flex;
     justify-content: center;
     width: 550px;
+    height: 40px;
     padding-top: 1%;
+    /* height: ; */
 }
 .image{
     height: 50px;

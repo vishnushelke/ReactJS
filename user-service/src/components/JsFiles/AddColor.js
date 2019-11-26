@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Tooltip, Dialog, IconButton, Popover } from "@material-ui/core";
 import ColorLensOutlinedIcon from "@material-ui/icons/ColorLensOutlined";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import { ColorUserNote } from "./JsFiles/Service";
+import { ColorUserNote } from "./Service";
 const theme = createMuiTheme({
   overrides: {
     MuiPaper: {

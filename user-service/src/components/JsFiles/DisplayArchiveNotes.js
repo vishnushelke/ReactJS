@@ -7,7 +7,7 @@ import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 
 import EditNote from "./EditNote";
-import AddColor from "../AddColor";
+import AddColor from "./AddColor";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import MoreIcon from "./MoreIcon";
 import { GetArchivedUserNote } from "./Service";

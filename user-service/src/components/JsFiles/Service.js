@@ -121,7 +121,7 @@ export function GetArchivedUserNote(tokenUserId){
     })
 }
 export function GetUserNoteOfLabel(labelId,tokenUserId){    
-    return axios.get('http://localhost:8080/user/labels/archivednotes',{
+    return axios.get('http://localhost:8080/user/labels/notes',{
         headers:{
             'Content-Type':'application/json;charset=utf-8',
             'tokenUserId':tokenUserId,

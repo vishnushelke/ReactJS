@@ -7,6 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import AccountInfo from "../JsFiles/AccountInfo";
 import MyDrawer from "./MyDrawer";
+import AddNote from "./AddNote";
 
 const theme = createMuiTheme({
   overrides: {
@@ -47,14 +48,19 @@ class PersistentDrawer extends Component {
 
     this.state = {
       anchorEl: null,
-      accountOpen: false
+      accountOpen: false,
+      label: false,
+      open: false
     };
   }
+
   componentWillMount() {
     let currentState = {
       archiveNote: false,
       allNote: true,
-      trashNote: false
+      trashNote: false,
+      label: false,
+      name: null
     };
     this.handleCurrentClick(currentState);
   }
@@ -65,34 +71,48 @@ class PersistentDrawer extends Component {
     });
   };
   handleCurrentClick = currentState => {
+    this.setState({ open: currentState.open });
     if (currentState.allNote === true) {
       console.log("sdfasdgdfgsdfg");
 
-      this.props.history.push("/Dashboard/notes");
+      this.props.history.push({pathname:"/Dashboard/notes",state:{open:this.state.open}});
     } else if (currentState.archiveNote === true) {
-      console.log('archive');
-      
+      console.log("archive");
+
       this.props.history.push("/Dashboard/archivenotes");
     } else if (currentState.trashNote === true) {
-      this.props.history.push('/Dashboard/trashnotes')
       console.log("trashed notes clicked");
+      this.props.history.push("/Dashboard/trashnotes");
     } else if (currentState.reminder === true) {
       console.log("reminder notes clicked");
+    } else if (currentState.label === true) {
+      let name = currentState.name;
+      let labelId = currentState.labelId;
+      console.log("label clicked");
+      this.props.history.push({
+        pathname: "/Dashboard/" + name,
+        state: { name: name, labelId: labelId }
+      });
     }
   };
   render() {
+    let open = this.state.open;
+    let className = open ? "movementOff" : "movementOn";
     return (
       <div className="rootDiv">
         <MuiThemeProvider theme={theme}>
           <AppBar position="fixed" className="AppBar" color="default">
             <Toolbar>
               <div className="nameIcon">
-                <MyDrawer currentClick={this.handleCurrentClick} />
+                <MyDrawer
+                  currentClick={this.handleCurrentClick}
+                  className={className}
+                />
                 <img src={Fundoo} alt="logo" className="image" />
                 <h3>FundooNotes</h3>
               </div>
 
-              <Paper style={{width:'550px'}}>
+              <Paper style={{ width: "550px" }}>
                 <div className="searchClass">
                   <div>
                     <SearchIcon className="search" />
@@ -121,6 +141,9 @@ class PersistentDrawer extends Component {
             paddingBottom: "50px"
           }}
         ></div>
+        <div className={className}>
+          <AddNote refresh={this.getNotes} />
+        </div>
       </div>
     );
   }

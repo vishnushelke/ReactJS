@@ -15,7 +15,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import AddLabel from "./AddLabel";
 import { GetAllLabels } from "./Service";
 
-
 const theme = createMuiTheme({
   overrides: {
     MuiDrawer: {
@@ -33,9 +32,11 @@ class MyDrawer extends Component {
     this.state = {
       open: true,
       AnchorEl: null,
-      labels: []
+      labels: [],
+      label: false
     };
   }
+
   componentWillMount() {
     this.getLabel();
   }
@@ -53,8 +54,7 @@ class MyDrawer extends Component {
       .catch(err => {
         console.log("error while fetching labels");
       });
-  }; 
-  
+  };
 
   handleDrawer = event => {
     const { currentTarget } = event;
@@ -62,37 +62,69 @@ class MyDrawer extends Component {
       AnchorEl: currentTarget,
       open: !this.state.open
     });
+    let currentState = {
+      allNote: false,
+      archiveNote: false,
+      trashNote: false,
+      label: false,
+      name: null,
+      labelId: 0,
+      open: this.state.open
+    };
+    this.props.currentClick(currentState);
   };
- handelAllNotes=()=>{
-   let currentState={
-     allNote:true,
-     archiveNote:false,
-     trashNote:false
-   }
-   this.props.currentClick(currentState)
- }
-  handelArchivedNotes=()=>{
-    let currentState={
-      allNote:false,
-      archiveNote:true,
-      trashNote:false
-    }
+  handelAllNotes = () => {
+    let currentState = {
+      allNote: true,
+      archiveNote: false,
+      trashNote: false,
+      label: false,
+      name: null,
+      labelId: 0,
+      open: this.state.open
+    };
+    this.props.currentClick(currentState);
+  };
+  handelArchivedNotes = () => {
+    let currentState = {
+      allNote: false,
+      archiveNote: true,
+      trashNote: false,
+      label: false,
+      name: null,
+      labelId: 0,
+      open: this.state.open
+    };
     console.log(this.props);
-    this.props.currentClick(currentState)
-  }
-  handelTrashedNotes=()=>{
-    let currentState={
-      allNote:false,
-      archiveNote:false,
-      trashNote:true
-    }
-    this.props.currentClick(currentState)
-  }
+    this.props.currentClick(currentState);
+  };
+  handelTrashedNotes = () => {
+    console.log("label clicked");
+    let currentState = {
+      allNote: false,
+      archiveNote: false,
+      trashNote: true,
+      label: false,
+      name: null,
+      labelId: 0,
+      open: this.state.open
+    };
+    this.props.currentClick(currentState);
+  };
 
-  componentWillReceiveProps(nextProps){
-    console.log('kuch',nextProps);
-    
-  }
+  handelLabelNotes = (name, labelId) => {
+    let currentState = {
+      allNote: false,
+      archiveNote: false,
+      trashNote: false,
+      label: true,
+      name: name,
+      labelId: labelId,
+      open: this.state.open
+    };
+    this.props.currentClick(currentState);
+  };
+
   render() {
     let open = this.state.open;
     return (
@@ -104,7 +136,15 @@ class MyDrawer extends Component {
           <div style={{ textAlign: "initial" }}>
             <Drawer variant="persistent" anchor="left" open={open}>
               <List>
-                <ListItem onClick={this.handelAllNotes} button key="Notes" style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
+                <ListItem
+                  onClick={this.handelAllNotes}
+                  button
+                  key="Notes"
+                  style={{
+                    borderTopRightRadius: "10px",
+                    borderBottomRightRadius: "10px"
+                  }}
+                >
                   <ListItemIcon>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +159,14 @@ class MyDrawer extends Component {
                   <ListItemText primary="Notes" />
                 </ListItem>
 
-                <ListItem button key="Reminders" style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
+                <ListItem
+                  button
+                  key="Reminders"
+                  style={{
+                    borderTopRightRadius: "10px",
+                    borderBottomRightRadius: "10px"
+                  }}
+                >
                   <ListItemIcon>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +195,17 @@ class MyDrawer extends Component {
               <List>
                 <div>
                   {this.state.labels.map(label => (
-                    <ListItem button key={label.name} style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
+                    <ListItem
+                      onClick={() =>
+                        this.handelLabelNotes(label.name, label.labelId)
+                      }
+                      button
+                      key="Notes"
+                      style={{
+                        borderTopRightRadius: "10px",
+                        borderBottomRightRadius: "10px"
+                      }}
+                    >
                       <ListItemIcon>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +225,15 @@ class MyDrawer extends Component {
               </List>
               <Divider></Divider>
               <List>
-                <ListItem onClick={this.handelArchivedNotes} button key="Archive" style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
+                <ListItem
+                  onClick={this.handelArchivedNotes}
+                  button
+                  key="Archive"
+                  style={{
+                    borderTopRightRadius: "10px",
+                    borderBottomRightRadius: "10px"
+                  }}
+                >
                   <ListItemIcon>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +247,15 @@ class MyDrawer extends Component {
                   </ListItemIcon>
                   <ListItemText primary="Archive" />
                 </ListItem>
-                <ListItem onClick={this.handelTrashedNotes} button key="Trash" style={{borderTopRightRadius: '10px',borderBottomRightRadius:'10px'}}>
+                <ListItem
+                  onClick={this.handelTrashedNotes}
+                  button
+                  key="Trash"
+                  style={{
+                    borderTopRightRadius: "10px",
+                    borderBottomRightRadius: "10px"
+                  }}
+                >
                   <ListItemIcon>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

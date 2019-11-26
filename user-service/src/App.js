@@ -12,22 +12,25 @@ import AddNotePopper from './components/JsFiles/AddNotePopper';
 import DisplayAllNotes from './components/JsFiles/DisplayAllNotes';
 import DisplayArchiveNotes from './components/JsFiles/DisplayArchiveNotes'
 import DisplayTrashedNote from './components/JsFiles/DisplayTrashedNote'
+import DisplayNotesOfLabel from './components/JsFiles/DisplayNotesOfLabel'
+
 function App() {
   return (
     <div className="App">
      <Router >       
-        <switch>      
+        <switch>
           <Route path='/' exact={true} component={Login} />
           <Route path='/Dashboard' component={Dashboard} />
           <Route path="/Dashboard/notes" component={DisplayAllNotes} />
           <Route path='/Dashboard/archivenotes'  component={DisplayArchiveNotes} />
-          <Route path='/Dashboard/trashnotes' component={DisplayTrashedNote} />       
+          <Route path='/Dashboard/trashnotes' component={DisplayTrashedNote} />    
+          <Route path='/Dashboard/:name' component={DisplayNotesOfLabel} />      
           <Route path='/ForgetPassword' component={ForgetPassword} />
           <Route path='/Register' component={Register} />
           <Route path='/user/validate/:token' component={VerifyUser} />
           <Route path='/ResetPassword' component={ResetPassword} />
           <Route path='/VerifyUserToReset' component={VerifyUserToReset} />
-          <Route path='/AddNotePopper' component={AddNotePopper} />       
+          <Route path='/AddNotePopper' component={AddNotePopper} />   
         </switch>
      </Router>
     </div>

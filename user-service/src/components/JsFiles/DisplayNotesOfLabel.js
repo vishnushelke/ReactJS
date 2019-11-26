@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Card, TextField, IconButton, Tooltip } from "@material-ui/core";
-import { GetAllNotes } from "./Service";
+import { GetAllNotes, GetUserNoteOfLabel } from "./Service";
 import AddReminder from "./AddReminder";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import AddNote from "./AddNote";
-import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
+
 import Masonry from "react-masonry-component";
 import EditNote from "./EditNote";
 import AddColor from "./AddColor";
@@ -26,7 +26,7 @@ const theme = createMuiTheme({
   }
 });
 
-class DisplayAllNotes extends Component {
+class DisplayNotesOfLabel extends Component {
   constructor(props) {
     super(props);
 
@@ -34,26 +34,25 @@ class DisplayAllNotes extends Component {
       notes: [],
       open: false,
       note: {},
-      sideOpen: false
+      labelId: 0
     };
   }
-  componentDidMount() {
-    let open = this.props.location.state.open;
-    this.setState({ sideOpen: open });
-    console.log("into notesjahsbkj", open);
-    this.getNotes();
-    console.log(this.state.sideOpen, "kjsdbkjdb");
-  }
 
-  getNotes = () => {
+  componentWillReceiveProps(newProps) {
+    let label = newProps.location.state;
+    if (label) {
+      this.getNotes(label.labelId);
+    }
+  }
+  getNotes = labelId => {
     let tokenUserId =
       "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
-    GetAllNotes(tokenUserId)
+    GetUserNoteOfLabel(labelId, tokenUserId)
       .then(response => {
-        console.log(response.data.data);
+        console.log(response);
         // this.props.refresh()
         this.setState({
-          notes: response.data.data.reverse()
+          notes: response.data.data
         });
       })
       .catch(err => {
@@ -78,26 +77,21 @@ class DisplayAllNotes extends Component {
     });
   };
   render() {
-    let sideOpen = this.state.sideOpen;
-    console.log(sideOpen, "kjsdbkjdb");
+    console.log(this.state.note, "noteupdate");
 
-    let className = sideOpen ? "movementOff" : "movementOn";
     let notes = this.state.notes;
 
     return (
-      <form className={className} style={{ alignItems: "center" }}>
+      <form style={{ paddingLeft: "15%" }}>
         <div
-          className={className}
           style={{
-            // display: "flex",
-            width: "850px"
-            // justifyContent: "space-around",
-            // flexDirection: "column"
+            display: "flex",
+            width: "850px",
+            justifyContent: "space-around",
+            flexDirection: "column"
           }}
         >
-          {/* <div>
-            <AddNote refresh={this.getNotes} />
-          </div> */}
+          
 
           <div>
             <MuiThemeProvider theme={theme}>
@@ -175,4 +169,4 @@ class DisplayAllNotes extends Component {
   }
 }
 
-export default DisplayAllNotes;
+export default DisplayNotesOfLabel;

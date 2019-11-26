@@ -7,7 +7,17 @@
 .App-logo {
   height: 40vmin;
 }
-
+.movementOff {
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.13s cubic-bezier(0, 0, 0.1, 1) 0ms;
+  }
+  .movementOn {
+  display: flex;
+  flex-direction: column;
+  margin-left: 9%;
+  transition: margin-left 0.13s cubic-bezier(0, 0, 0.1, 1) 0ms;
+  }
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

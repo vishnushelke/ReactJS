@@ -55,7 +55,7 @@ class MoreIcon extends Component {
                 />
               </div>
               <div>
-                <Button fullWidth onClick={this.close}>
+                <Button fullWidth onClick={this.handleAddLabels}>
                   Add Label
                 </Button>
               </div>
