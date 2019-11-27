@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card, TextField, Tooltip } from "@material-ui/core";
-import { GetAllNotes, RemoveNoteReminder } from "./Service";
+import { GetAllNotes, RemoveNoteReminder, GetReminderNotes } from "./Service";
 import AddReminder from "./AddReminder";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import Masonry from "react-masonry-component";
@@ -26,31 +26,26 @@ const theme = createMuiTheme({
   }
 });
 
-class DisplayAllNotes extends Component {
+class DisplayReminderNotes extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       notes: [],
       open: false,
-      note: {},
-      sideOpen: true
+      note: {}
+      
     };
   }
   componentDidMount() {
     this.getNotes();
-    console.log(this.state.sideOpen, "kjsdbkjdb");
-  }
-  componentWillReceiveProps(newProps) {
-    console.log(newProps, "newProps");
-    let open = newProps.location.state.open;
-    this.setState({ sideOpen: open });
+    console.log(this.state.notes,"notes");
   }
 
   getNotes = () => {
     let tokenUserId =
       "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
-    GetAllNotes(tokenUserId)
+    GetReminderNotes(tokenUserId)
       .then(response => {
         console.log(response.data.data);
         // this.props.refresh()
@@ -94,11 +89,11 @@ class DisplayAllNotes extends Component {
       });
   };
   render() {
-    let sideOpen = this.state.sideOpen;
-    console.log(sideOpen, "kjsdbkjdb");
 
     // let className = sideOpen ? "movementOff" : "movementOn";
     let notes = this.state.notes;
+    console.log(notes,"notes");
+    
 
     return (
       <form style={{ alignItems: "center", paddingLeft: "15%" }}>
@@ -198,4 +193,4 @@ class DisplayAllNotes extends Component {
   }
 }
 
-export default DisplayAllNotes;
+export default DisplayReminderNotes;

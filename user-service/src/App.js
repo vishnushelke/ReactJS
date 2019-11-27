@@ -13,6 +13,7 @@ import DisplayAllNotes from './components/JsFiles/DisplayAllNotes';
 import DisplayArchiveNotes from './components/JsFiles/DisplayArchiveNotes'
 import DisplayTrashedNote from './components/JsFiles/DisplayTrashedNote'
 import DisplayNotesOfLabel from './components/JsFiles/DisplayNotesOfLabel'
+import DisplayReminderNotes from './components/JsFiles/DisplayReminserNotes';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/Dashboard' component={Dashboard} />
           <Route path="/Dashboard/notes" component={DisplayAllNotes} />
           <Route path='/Dashboard/archivenotes'  component={DisplayArchiveNotes} />
+          <Route path='/Dashboard/reminder'  component={DisplayReminderNotes} />
           <Route path='/Dashboard/trashnotes' component={DisplayTrashedNote} />    
           <Route path='/Dashboard/:name' component={DisplayNotesOfLabel} />      
           <Route path='/ForgetPassword' component={ForgetPassword} />

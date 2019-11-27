@@ -69,31 +69,36 @@ class MyDrawer extends Component {
       label: false,
       name: null,
       labelId: 0,
-      open: this.state.open
+      open: this.state.open,
+      labels:this.state.labels
     };
     this.props.currentClick(currentState);
   };
   handelAllNotes = () => {
     let currentState = {
+      reminder:false,
       allNote: true,
       archiveNote: false,
       trashNote: false,
       label: false,
       name: null,
       labelId: 0,
-      open: this.state.open
+      open: this.state.open,
+      labels:this.state.labels
     };
     this.props.currentClick(currentState);
   };
   handelArchivedNotes = () => {
     let currentState = {
+      reminder:false,
       allNote: false,
       archiveNote: true,
       trashNote: false,
       label: false,
       name: null,
       labelId: 0,
-      open: this.state.open
+      open: this.state.open,
+      labels:this.state.labels
     };
     console.log(this.props);
     this.props.currentClick(currentState);
@@ -101,26 +106,45 @@ class MyDrawer extends Component {
   handelTrashedNotes = () => {
     console.log("label clicked");
     let currentState = {
+      reminder:false,
       allNote: false,
       archiveNote: false,
       trashNote: true,
       label: false,
       name: null,
       labelId: 0,
-      open: this.state.open
+      open: this.state.open,
+      labels:this.state.labels
     };
     this.props.currentClick(currentState);
   };
 
   handelLabelNotes = (name, labelId) => {
     let currentState = {
+      reminder:false,
       allNote: false,
       archiveNote: false,
       trashNote: false,
       label: true,
       name: name,
       labelId: labelId,
-      open: this.state.open
+      open: this.state.open,
+      labels:this.state.labels
+    };
+    this.props.currentClick(currentState);
+  };
+  handelReminderNotes = () => {
+    console.log("label clicked");
+    let currentState = {
+      reminder:true,
+      allNote: false,
+      archiveNote: false,
+      trashNote: false,
+      label: false,
+      name: null,
+      labelId: 0,
+      open: this.state.open,
+      labels:this.state.labels
     };
     this.props.currentClick(currentState);
   };
@@ -161,6 +185,7 @@ class MyDrawer extends Component {
 
                 <ListItem
                   button
+                  onClick={this.handelReminderNotes}
                   key="Reminders"
                   style={{
                     borderTopRightRadius: "10px",

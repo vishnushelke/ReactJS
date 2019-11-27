@@ -8,6 +8,7 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import AccountInfo from "../JsFiles/AccountInfo";
 import MyDrawer from "./MyDrawer";
 import AddNote from "./AddNote";
+import { SearchUserNoteByTitle } from "./Service";
 
 const theme = createMuiTheme({
   overrides: {
@@ -50,7 +51,9 @@ class PersistentDrawer extends Component {
       anchorEl: null,
       accountOpen: false,
       label: false,
-      open: false
+      open: false,
+      title: "",
+      labels: []
     };
   }
 
@@ -71,11 +74,17 @@ class PersistentDrawer extends Component {
     });
   };
   handleCurrentClick = currentState => {
-    this.setState({ open: currentState.open });
+    this.setState({
+      open: currentState.open,
+      labels: currentState.labels
+    });
     if (currentState.allNote === true) {
       console.log("sdfasdgdfgsdfg");
 
-      this.props.history.push({pathname:"/Dashboard/notes",state:{open:this.state.open}});
+      this.props.history.push({
+        pathname: "/Dashboard/notes",
+        state: { open: this.state.open }
+      });
     } else if (currentState.archiveNote === true) {
       console.log("archive");
 
@@ -85,6 +94,7 @@ class PersistentDrawer extends Component {
       this.props.history.push("/Dashboard/trashnotes");
     } else if (currentState.reminder === true) {
       console.log("reminder notes clicked");
+      this.props.history.push("/Dashboard/reminder");
     } else if (currentState.label === true) {
       let name = currentState.name;
       let labelId = currentState.labelId;
@@ -93,7 +103,30 @@ class PersistentDrawer extends Component {
         pathname: "/Dashboard/" + name,
         state: { name: name, labelId: labelId }
       });
-    }
+    } 
+  };
+  handelSearchNoteChange = event => {
+    this.setState({
+      title: event.target.value
+    });
+    // console.log(this.state.title);
+  };
+  componentDidMount() {}
+  handelSearchNote = () => {
+    let title = this.state.title;
+    let tokenUserId =
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    console.log(title, "title of note");
+    SearchUserNoteByTitle(title, tokenUserId)
+      .then(response => {
+        console.log("notes search success", response.data.data);
+        // this.setState({
+        //   notes:response.data.data
+        // })
+      })
+      .catch(err => {
+        console.log("search note fail");
+      });
   };
   render() {
     let open = this.state.open;
@@ -112,13 +145,18 @@ class PersistentDrawer extends Component {
                 <h3>FundooNotes</h3>
               </div>
 
-              <Paper style={{ width: "550px" }}>
+              <Paper style={{ width: "750px" }}>
                 <div className="searchClass">
                   <div>
                     <SearchIcon className="search" />
                   </div>
 
-                  <InputBase placeholder="search" className="searchBar" />
+                  <InputBase
+                    placeholder="search"
+                    className="searchBar"
+                    onClick={this.handelSearchNote}
+                    onChange={this.handelSearchNoteChange}
+                  />
                 </div>
               </Paper>
 
@@ -141,7 +179,7 @@ class PersistentDrawer extends Component {
             paddingBottom: "50px"
           }}
         ></div>
-        <div className={className}>
+        <div style={{ paddingLeft: "15%" }}>
           <AddNote refresh={this.getNotes} />
         </div>
       </div>

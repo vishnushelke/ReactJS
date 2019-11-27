@@ -147,3 +147,43 @@ export function ForeverDeleteUserNote(noteId,tokenUserId){
         }
     })
 }
+export function SearchUserNoteByTitle(title,tokenUserId){    
+    return axios.get('http://localhost:8080/user/notes/searchnotes',{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId,
+            'title':title
+        }
+    })
+}
+export function AddNoteReminder(noteId,reminderTime,tokenUserId){   
+    console.log(typeof reminderTime);
+     
+    return axios.put('http://localhost:8080/user/notes/addreminder',{},{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId,
+            'noteId':noteId,
+            'reminderTime':reminderTime
+        }
+    })
+}
+export function RemoveNoteReminder(noteId,tokenUserId){   
+    console.log(typeof reminderTime);
+     
+    return axios.put('http://localhost:8080/user/notes/removereminder',{},{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId,
+            'noteId':noteId
+        }
+    })
+}
+export function GetReminderNotes(tokenUserId){    
+    return axios.get('http://localhost:8080/user/notes/getremindernotes',{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId
+        }
+    })
+}
