@@ -5,7 +5,7 @@ import { ArchiveUserNote } from "./Service";
 
 class ArchiveNote extends Component {
 handleArchiveNote=()=>{
-    let tokenUserId='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34'
+  let tokenUserId =localStorage.getItem("LoginToken");
     let noteId=this.props.note.noteId
     console.log(noteId);
     

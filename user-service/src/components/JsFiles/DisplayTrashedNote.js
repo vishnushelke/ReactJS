@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, TextField, Tooltip } from "@material-ui/core";
+import { Card, TextField } from "@material-ui/core";
 import DeleteForever from "./DeleteForever";
 import Masonry from "react-masonry-component";
 import EditNote from "./EditNote";
@@ -39,8 +39,7 @@ class DisplayTrashedNote extends Component {
     this.handelTrashedNotes();
   }
   handelTrashedNotes = () => {
-    let tokenUserId =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    let tokenUserId =localStorage.getItem("LoginToken");
     GetTrashedUserNote(tokenUserId)
       .then(response => {
         console.log("trashed notes fetched successfully");

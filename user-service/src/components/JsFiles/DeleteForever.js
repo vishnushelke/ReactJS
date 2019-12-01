@@ -5,8 +5,7 @@ import { ForeverDeleteUserNote } from "./Service";
 class DeleteForever extends Component {
   handelDeleteForever = () => {
     let noteId = this.props.note.noteId;
-    let tokenUserId =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    let tokenUserId =localStorage.getItem("LoginToken");
     ForeverDeleteUserNote(noteId, tokenUserId)
       .then(response => {
         console.log("note delete success");

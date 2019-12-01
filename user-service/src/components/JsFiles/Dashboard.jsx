@@ -74,16 +74,18 @@ class PersistentDrawer extends Component {
     });
   };
   handleCurrentClick = currentState => {
-    this.setState({
-      open: currentState.open,
-      labels: currentState.labels
-    });
+    // this.setState({
+    //   open: currentState.open,
+    //   labels: currentState.labels
+    // });
+    console.log('inside');
     if (currentState.allNote === true) {
-      console.log("sdfasdgdfgsdfg");
+      console.log("labels on dashboard", this.state.labels);
+console.log('All notes called');
 
       this.props.history.push({
         pathname: "/Dashboard/notes",
-        state: { open: this.state.open }
+        state: { open: this.state.open,labels:this.state.labels }
       });
     } else if (currentState.archiveNote === true) {
       console.log("archive");
@@ -103,7 +105,7 @@ class PersistentDrawer extends Component {
         pathname: "/Dashboard/" + name,
         state: { name: name, labelId: labelId }
       });
-    } 
+    }
   };
   handelSearchNoteChange = event => {
     this.setState({
@@ -111,22 +113,15 @@ class PersistentDrawer extends Component {
     });
     // console.log(this.state.title);
   };
-  componentDidMount() {}
-  handelSearchNote = () => {
-    let title = this.state.title;
-    let tokenUserId =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
-    console.log(title, "title of note");
-    SearchUserNoteByTitle(title, tokenUserId)
-      .then(response => {
-        console.log("notes search success", response.data.data);
-        // this.setState({
-        //   notes:response.data.data
-        // })
-      })
-      .catch(err => {
-        console.log("search note fail");
+  
+  handelSearchNote = event => {
+    console.log("keys", event.key);
+    if (event.key === "Enter") {
+      this.props.history.push({
+        pathname: "/Dashboard/searchnote",
+        state: { name: this.state.title }
       });
+    }
   };
   render() {
     let open = this.state.open;
@@ -154,8 +149,8 @@ class PersistentDrawer extends Component {
                   <InputBase
                     placeholder="search"
                     className="searchBar"
-                    onClick={this.handelSearchNote}
                     onChange={this.handelSearchNoteChange}
+                    onKeyDown={this.handelSearchNote}
                   />
                 </div>
               </Paper>
@@ -180,7 +175,7 @@ class PersistentDrawer extends Component {
           }}
         ></div>
         <div style={{ paddingLeft: "15%" }}>
-          <AddNote refresh={this.getNotes} />
+          <AddNote  refresh={this.handleCurrentClick}/>
         </div>
       </div>
     );

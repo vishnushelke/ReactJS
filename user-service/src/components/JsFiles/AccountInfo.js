@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Card,
   Popper,
   Paper,
   DialogContent,
@@ -10,6 +9,7 @@ import {
 import profilePic from "../../Assets/images.jpeg";
 import Button from "@material-ui/core/Button";
 import Fundoo from "../../Assets/images.jpeg";
+import nullProfile from "../../Assets/nullProfile.jpg";
 
 class AccountInfo extends Component {
   constructor(props) {
@@ -28,10 +28,14 @@ class AccountInfo extends Component {
     });
   };
   handleSignOut = () => {
+    localStorage.removeItem("LoginToken")
     this.props.props.history.push("/");
   };
 
   render() {
+    let name=localStorage.getItem("name")
+    let email=localStorage.getItem("emailId")
+    // let profilePic=localStorage.getItem("profilePic")
     let open = this.state.open;
     const id = open ? "scroll-playground" : null;
     return (
@@ -43,7 +47,7 @@ class AccountInfo extends Component {
         }}
       >
         <img
-          src={Fundoo}
+          src={profilePic}
           alt="profPic"
           style={{ hight: "50px", width: "50px" }}
           onClick={this.handleAccountInfo}
@@ -76,8 +80,8 @@ class AccountInfo extends Component {
                 }}
               >
                 <img
-                  src={profilePic}
-                  alt="profilePic"
+                  src={Fundoo}
+                  alt={nullProfile}
                   style={{
                     hight: "100px",
                     width: "100px",
@@ -85,9 +89,9 @@ class AccountInfo extends Component {
                     alignSelf: "center"
                   }}
                 ></img>
-                <div>vishnu shelke</div>
+                <div>{name}</div>
                 <br></br>
-                <div>shelkeva@gmail.com</div>
+                <div>{email}</div>
                 <br></br>
                 <Divider></Divider>
                 <DialogContent

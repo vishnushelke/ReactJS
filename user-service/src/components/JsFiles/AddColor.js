@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tooltip, Dialog, IconButton, Popover } from "@material-ui/core";
+import { Tooltip, IconButton, Popover } from "@material-ui/core";
 import ColorLensOutlinedIcon from "@material-ui/icons/ColorLensOutlined";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { ColorUserNote } from "./Service";
@@ -86,7 +86,7 @@ class AddColor extends Component {
   setColor=(color)=>{
       
       let noteId=this.props.note.noteId; 
-      let tokenUserId = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+      let tokenUserId =localStorage.getItem("LoginToken");
       ColorUserNote(noteId,color,tokenUserId).then(response=>{
         this.props.refresh();
         console.log('color set successfully');

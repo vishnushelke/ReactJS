@@ -61,6 +61,11 @@ class Login extends Component {
       LoginUser(loginDto)
         .then(response => {
           console.log(response);
+          localStorage.setItem("LoginToken",response.data.data)
+          localStorage.setItem("name",response.data.user.firstname+' '+response.data.user.lastname)
+          localStorage.setItem("profilePic",response.data.user.profilePicture)
+          localStorage.setItem("userId",response.data.user.uid)
+          localStorage.setItem("emailId",response.data.user.email)
           this.props.history.push("/dashboard/notes");
         })
         .catch(err => {

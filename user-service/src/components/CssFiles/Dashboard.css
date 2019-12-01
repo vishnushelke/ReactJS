@@ -59,7 +59,28 @@ margin-right: 20px;
     flex-direction: row;
     justify-content: space-around;
 }
-.LabelAlign{
-    display:flex;
-    flex-direction: column;
+.labelFlex{
+    display: flex;
+    flex-direction: row;
 }
+
+#delete {
+    color: grey;
+    display: none;
+    cursor: pointer;
+    }
+    #show:hover #label {
+    color: grey;
+    display: none;
+    }
+    #show:hover #delete {
+    color:grey;
+    display: block;
+    }
+    .createLabel{
+        display: flex;
+        flex-direction: row;
+    }
+    .labelPosition{
+        margin-left: 4px;
+    }

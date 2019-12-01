@@ -8,7 +8,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import AddAlertOutlinedIcon from "@material-ui/icons/AddAlertOutlined";
-import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 import '../CssFiles/AddReminderStyle.css'
 import { AddNoteReminder } from './Service';
 
@@ -112,8 +111,7 @@ export default class AddReminder extends Component {
         console.log("note data",this.props.note);
         
         if (this.props.note) {
-            let tokenUserId =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+            let tokenUserId =localStorage.getItem("LoginToken");
             let date=[]
            
             let reminderTime = {

@@ -130,11 +130,22 @@ export function GetUserNoteOfLabel(labelId,tokenUserId){
     })
 }
 export function AddNoteToLabel(noteId,labelId,tokenUserId){    
-    return axios.get('http://localhost:8080/user/notes/addtolabel',{
+    return axios.put('http://localhost:8080/user/notes/addtolabel',{},{
         headers:{
             'Content-Type':'application/json;charset=utf-8',
             'tokenUserId':tokenUserId,
-            'labelId':labelId
+            'labelId':labelId,
+            'noteId':noteId
+        }
+    })
+}
+export function RemoveNoteFromLabel(noteId,labelId,tokenUserId){    
+    return axios.put('http://localhost:8080/user/notes/removefromlabel',{},{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId,
+            'labelId':labelId,
+            'noteId':noteId
         }
     })
 }
@@ -148,6 +159,8 @@ export function ForeverDeleteUserNote(noteId,tokenUserId){
     })
 }
 export function SearchUserNoteByTitle(title,tokenUserId){    
+    console.log(typeof title,' ',typeof tokenUserId);
+    
     return axios.get('http://localhost:8080/user/notes/searchnotes',{
         headers:{
             'Content-Type':'application/json;charset=utf-8',
@@ -184,6 +197,24 @@ export function GetReminderNotes(tokenUserId){
         headers:{
             'Content-Type':'application/json;charset=utf-8',
             'tokenUserId':tokenUserId
+        }
+    })
+}
+export function DeleteUserLabel(labelId,tokenUserId){    
+    return axios.delete('http://localhost:8080/user/labels',{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId,
+            labelId:labelId
+        }
+    })
+}
+export function UpdateUserLabel(labelId,tokenUserId,addLabelDto){    
+    return axios.put('http://localhost:8080/user/labels',addLabelDto,{
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'tokenUserId':tokenUserId,
+            labelId:labelId
         }
     })
 }

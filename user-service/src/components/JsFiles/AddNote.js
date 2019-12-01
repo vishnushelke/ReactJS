@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import { InputBase, Card, IconButton, Tooltip } from "@material-ui/core";
+import { InputBase, Card, Tooltip } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import AddAlertOutlinedIcon from "@material-ui/icons/AddAlertOutlined";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import ColorLensOutlinedIcon from "@material-ui/icons/ColorLensOutlined";
-import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import ArchiveOutlinedIcon from "@material-ui/icons/ArchiveOutlined";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { AddUserNote } from "./Service";
+import { AddUserNote, GetAllNotes } from "./Service";
 
 class AddNote extends Component {
   constructor(props) {
@@ -35,12 +34,22 @@ class AddNote extends Component {
     addNoteDto.title = this.state.title;
     addNoteDto.text = this.state.text;
     addNoteDto.color = this.state.color;
-    let tokenUserId =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    let tokenUserId =localStorage.getItem("LoginToken");
     AddUserNote(addNoteDto, tokenUserId)
       .then(() => {
         console.log("note added successfully");
-        this.props.refresh();
+        console.log('add note props' , this.props);
+        let currentState = {
+          reminder:false,
+          allNote: true,
+          archiveNote: false,
+          trashNote: false,
+          label: false,
+          name: null,
+          labelId: 0
+        };
+        this.props.refresh(currentState);
+        
       })
       .catch(err => {
         console.log("error in adding note");
@@ -67,6 +76,9 @@ class AddNote extends Component {
       title: ""
     });
   };
+  getNotes=()=>{
+    GetAllNotes(localStorage.getItem("LoginToken"))
+  }
 
   render() {
     return (

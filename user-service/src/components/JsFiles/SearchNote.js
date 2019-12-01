@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Card, TextField, Tooltip } from "@material-ui/core";
-import { RemoveNoteReminder, GetReminderNotes } from "./Service";
+import {
+  GetAllNotes,
+  RemoveNoteReminder,
+  SearchUserNoteByTitle
+} from "./Service";
 import AddReminder from "./AddReminder";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import Masonry from "react-masonry-component";
@@ -26,40 +30,43 @@ const theme = createMuiTheme({
   }
 });
 
-class DisplayReminderNotes extends Component {
+class SearchNote extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       notes: [],
       open: false,
-      note: {}
-      
+      note: {},
+      sideOpen: true,
+      name:''
     };
   }
   componentDidMount() {
     this.getNotes();
-    console.log(this.state.notes,"reminder notes");
+    console.log(this.state.sideOpen, "kjsdbkjdb");
   }
-  componentWillReceiveProps(newProps){
-    console.log("reminder props",newProps);
+  componentWillReceiveProps(newProps) {
+    console.log(newProps.location.state.name, "newProps");
     
+    this.setState({ name: newProps.location.state.name});
   }
 
   getNotes = () => {
-    let tokenUserId =localStorage.getItem("LoginToken");
-    GetReminderNotes(tokenUserId)
-      .then(response => {
-        console.log('reminder notes fetched success' , response.data.data);
-       
-        this.setState({
-          notes: response.data.data
+    let title = this.props.location.state.name;
+    console.log(title,"title of note");
+    
+      let tokenUserId = localStorage.getItem("LoginToken");
+      SearchUserNoteByTitle(title, tokenUserId)
+        .then(response => {
+          console.log("notes search success", response.data.data);
+          this.setState({
+            notes:response.data.data
+          })
+        })
+        .catch(err => {
+          console.log("search note fail");
         });
-        this.props.refresh();
-      })
-      .catch(err => {
-        console.log("reminder notes fetched fail");
-      });
   };
   handleEditNote = noteData => {
     this.setState({
@@ -82,8 +89,7 @@ class DisplayReminderNotes extends Component {
   handleDelete = note => {
     let noteId = 0;
     noteId = note.noteId;
-    let tokenUserId =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    let tokenUserId = localStorage.getItem("LoginToken");
     RemoveNoteReminder(noteId, tokenUserId)
       .then(response => {
         console.log(response, "reminder deleted successfully");
@@ -93,11 +99,12 @@ class DisplayReminderNotes extends Component {
       });
   };
   render() {
+   
+    let title = this.state.name;
+    console.log(title,"title of note");
 
     // let className = sideOpen ? "movementOff" : "movementOn";
     let notes = this.state.notes;
-    console.log(notes,"notes");
-    
 
     return (
       <form style={{ alignItems: "center", paddingLeft: "15%" }}>
@@ -197,4 +204,4 @@ class DisplayReminderNotes extends Component {
   }
 }
 
-export default DisplayReminderNotes;
+export default SearchNote;

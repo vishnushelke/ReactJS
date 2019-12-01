@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { Popper, Paper, Button } from "@material-ui/core";
+import { Popper, Paper } from "@material-ui/core";
 import TrashNote from "./TrashNote";
+import AddNoteToLabel from "./AddNoteToLabel";
 class MoreIcon extends Component {
   constructor(props) {
     super(props);
@@ -20,9 +21,10 @@ class MoreIcon extends Component {
       open: !this.state.open
     });
   };
+
   close = () => {
     this.setState({
-      anchorEl: null,
+      // anchorEl: null,
       open: false
     });
   };
@@ -55,9 +57,7 @@ class MoreIcon extends Component {
                 />
               </div>
               <div>
-                <Button fullWidth onClick={this.handleAddLabels}>
-                  Add Label
-                </Button>
+                <AddNoteToLabel note={note} refresh={this.props.refresh}  close={this.close} anchorEl={this.state.anchorEl} labels={this.props.labels}/>
               </div>
             </Paper>
           </Popper>

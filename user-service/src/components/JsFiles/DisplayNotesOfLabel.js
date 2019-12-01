@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Card, TextField, IconButton, Tooltip } from "@material-ui/core";
-import { GetAllNotes, GetUserNoteOfLabel } from "./Service";
+import { Card, TextField, Tooltip } from "@material-ui/core";
+import { GetUserNoteOfLabel } from "./Service";
 import AddReminder from "./AddReminder";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
-import AddNote from "./AddNote";
 
 import Masonry from "react-masonry-component";
 import EditNote from "./EditNote";

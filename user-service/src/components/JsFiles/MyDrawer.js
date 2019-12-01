@@ -41,8 +41,7 @@ class MyDrawer extends Component {
     this.getLabel();
   }
   getLabel = () => {
-    let tokenUserId =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    let tokenUserId =localStorage.getItem("LoginToken");
     GetAllLabels(tokenUserId)
       .then(response => {
         console.log("labels fetched successfully");
@@ -75,6 +74,8 @@ class MyDrawer extends Component {
     this.props.currentClick(currentState);
   };
   handelAllNotes = () => {
+    console.log(this.state.labels,"labels in my drawer");
+    
     let currentState = {
       reminder:false,
       allNote: true,
@@ -154,8 +155,8 @@ class MyDrawer extends Component {
     return (
       <div>
         <MuiThemeProvider theme={theme}>
-          <IconButton>
-            <MenuIcon onClick={this.handleDrawer} />
+          <IconButton onClick={this.handleDrawer} >
+            <MenuIcon />
           </IconButton>
           <div style={{ textAlign: "initial" }}>
             <Drawer variant="persistent" anchor="left" open={open}>

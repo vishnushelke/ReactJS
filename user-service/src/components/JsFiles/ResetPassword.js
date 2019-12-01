@@ -30,8 +30,7 @@ class ResetPassword extends Component {
     let confpassword = this.state.confpassword;
     let resetPasswordDto = {};
     resetPasswordDto.password = password;
-    let token =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    let token =localStorage.getItem("LoginToken");
     let err = this.state.err;
     if (password !== confpassword) {
       err["password"] = "both password should be same";

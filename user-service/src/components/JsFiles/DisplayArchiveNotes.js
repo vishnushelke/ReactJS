@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import { Card, TextField, Tooltip } from "@material-ui/core";
-
-import AddAlertOutlinedIcon from "@material-ui/icons/AddAlertOutlined";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
-
-import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
-
 import EditNote from "./EditNote";
 import AddColor from "./AddColor";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
@@ -45,8 +40,7 @@ class DisplayArchiveNotes extends Component {
     this.handelArchivedNotes();
   }
   handelArchivedNotes = () => {
-    let tokenUserId =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    let tokenUserId =localStorage.getItem("LoginToken");
     GetArchivedUserNote(tokenUserId)
       .then(response => {
         console.log("archived notes fetched successfully");
