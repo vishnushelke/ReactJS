@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import { Card, TextField, Tooltip } from "@material-ui/core";
-import { GetAllNotes, RemoveNoteReminder, RemoveNoteFromLabel } from "./Service";
+import {
+  GetAllNotes,
+  RemoveNoteReminder,
+  RemoveNoteFromLabel
+} from "./Service";
 import AddReminder from "./AddReminder";
-import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import Masonry from "react-masonry-component";
 import EditNote from "./EditNote";
 import AddColor from "./AddColor";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import ArchiveNote from "./ArchiveNote";
-import MoreIcon from "./MoreIcon";
 import Chip from "@material-ui/core/Chip";
 import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
-import MoreButton from './moreMenuDetails'
+import MoreButton from "./moreMenuDetails";
+import AddCollaborator from "./AddCollaborator";
 const theme = createMuiTheme({
   overrides: {
     MuiPaper: {
@@ -36,27 +39,25 @@ class DisplayAllNotes extends Component {
       open: false,
       note: {},
       sideOpen: true,
-      labels:[]
+      labels: [],
+      openCollab:false
     };
   }
   componentWillMount() {
-   
-    
     this.getNotes();
     console.log(this.state.sideOpen, "kjsdbkjdb");
   }
-  
+
   componentWillReceiveProps(newProps) {
     this.getNotes();
-    console.log('display notes callled');
-    console.log("newProps Recievedddddddddd",newProps);
+    console.log("display notes callled");
+    console.log("newProps Recievedddddddddd", newProps);
     let open = newProps.location.state.open;
-    let labels=newProps.location.state.labels
-    this.setState({ 
+    let labels = newProps.location.state.labels;
+    this.setState({
       sideOpen: open,
-      labels:labels
-     });
-
+      labels: labels
+    });
   }
 
   getNotes = () => {
@@ -84,28 +85,36 @@ class DisplayAllNotes extends Component {
       open: false
     });
   };
+  handleDialogBoxCollab=()=>{
+    this.setState({
+      openCollab: false
+    });
+  }
   handelNoteSave = thisnote => {
     this.setState({
       open: false,
       note: thisnote
     });
   };
-  handelRemoveNote=(labelObject,noteId)=>{
-      let labelId= labelObject.labelId
-      let tokenUserId = localStorage.getItem("LoginToken")
-      RemoveNoteFromLabel(noteId,labelId,tokenUserId).then(response=>{
-        this.getNotes()
-      }).catch(err => {
+  handelRemoveNote = (labelObject, noteId) => {
+    let labelId = labelObject.labelId;
+    let tokenUserId = localStorage.getItem("LoginToken");
+    RemoveNoteFromLabel(noteId, labelId, tokenUserId)
+      .then(response => {
+        this.getNotes();
+      })
+      .catch(err => {
         console.log(err);
       });
-  }
+  };
   handleDelete = note => {
     let noteId = 0;
     noteId = note.noteId;
-    let tokenUserId =localStorage.getItem("LoginToken");
+    let tokenUserId = localStorage.getItem("LoginToken");
     RemoveNoteReminder(noteId, tokenUserId)
       .then(response => {
         console.log(response, "reminder deleted successfully");
+        this.getNotes();
       })
       .catch(err => {
         console.log("reminder delete fail");
@@ -181,16 +190,17 @@ class DisplayAllNotes extends Component {
                       )}
                       {text.labels && (
                         <div>
-                        {text.labels.map(label=>(
-                          <Chip
-                          size="small"
-                          label={label.name}
-                          // onClick={handleClick}
-                          onDelete={() => this.handelRemoveNote(label,text.noteId)}
-                          deleteIcon={<ClearOutlinedIcon />}
-                        />
-                        ))}
-                        
+                          {text.labels.map(label => (
+                            <Chip
+                              size="small"
+                              label={label.name}
+                              // onClick={handleClick}
+                              onDelete={() =>
+                                this.handelRemoveNote(label, text.noteId)
+                              }
+                              deleteIcon={<ClearOutlinedIcon />}
+                            />
+                          ))}
                         </div>
                       )}
                       <div
@@ -203,14 +213,21 @@ class DisplayAllNotes extends Component {
                         }}
                       >
                         <AddReminder note={text} refresh={this.getNotes} />
-                        <Tooltip title="collaborator">
-                          <PersonAddOutlinedIcon style={{ width: "20px" }} />
-                        </Tooltip>
+                        <AddCollaborator
+                          open={this.state.openCollab}
+                          note={text}
+                          closeDialog={this.handleDialogBoxCollab}
+                          refresh={this.getNotes}
+                        />
                         <AddColor note={text} refresh={this.getNotes} />
                         <ArchiveNote note={text} refresh={this.getNotes} />
                         <Tooltip title="more">
-                        <MoreButton noteProps={text} refresh={this.getNotes} labelArray={this.state.labels} /> 
-                         </Tooltip>
+                          <MoreButton
+                            noteProps={text}
+                            refresh={this.getNotes}
+                            labelArray={this.state.labels}
+                          />
+                        </Tooltip>
                       </div>
                     </Card>
                   </div>

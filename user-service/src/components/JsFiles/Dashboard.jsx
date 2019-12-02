@@ -8,7 +8,6 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import AccountInfo from "../JsFiles/AccountInfo";
 import MyDrawer from "./MyDrawer";
 import AddNote from "./AddNote";
-import { SearchUserNoteByTitle } from "./Service";
 
 const theme = createMuiTheme({
   overrides: {

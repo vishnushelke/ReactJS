@@ -126,7 +126,7 @@ export default class AddReminder extends Component {
             console.log("new date",remindernew);    
             AddNoteReminder(reminderTime.noteId,remindernew,tokenUserId).then((data) => {
                 console.log(data);
-                // this.props.refresh();
+                this.props.refresh();
             }).catch((err) => {
                 console.log(err);
             })

@@ -218,3 +218,11 @@ export function UpdateUserLabel(labelId,tokenUserId,addLabelDto){
         }
     })
 }
+export function UploadUserProfile(file,tokenUserId){    
+    return axios.post('http://localhost:8080/user/addprofile',file,{
+        headers:{
+            // "Content-Type": "multipart/form-data",
+            'tokenUserId':tokenUserId
+        }
+    })
+}

@@ -87,6 +87,7 @@ class DisplayReminderNotes extends Component {
     RemoveNoteReminder(noteId, tokenUserId)
       .then(response => {
         console.log(response, "reminder deleted successfully");
+        this.getNotes()
       })
       .catch(err => {
         console.log("reminder delete fail");
