@@ -226,3 +226,23 @@ export function UploadUserProfile(file,tokenUserId){
         }
     })
 }
+export function CollaborateNote(noteId,emailId,tokenUserId){    
+    return axios.put('http://localhost:8080/user/notes/addcollab',{},{
+        headers:{
+            // "Content-Type": "multipart/form-data",
+            'tokenUserId':tokenUserId,
+            'noteId':noteId,
+            'emailId':emailId
+        }
+    })
+}
+export function DeleteCollaboration(noteId,emailId,tokenUserId){    
+    return axios.put('http://localhost:8080/user/notes/removecollab',{},{
+        headers:{
+            // "Content-Type": "multipart/form-data",
+            'tokenUserId':tokenUserId,
+            'noteId':noteId,
+            'emailId':emailId
+        }
+    })
+}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, TextField, Tooltip } from "@material-ui/core";
+import { Card, TextField, Tooltip, Avatar } from "@material-ui/core";
 import {
   GetAllNotes,
   RemoveNoteReminder,
@@ -183,7 +183,6 @@ class DisplayAllNotes extends Component {
                         <Chip
                           size="small"
                           label={text.reminder}
-                          // onClick={handleClick}
                           onDelete={() => this.handleDelete(text)}
                           deleteIcon={<ClearOutlinedIcon />}
                         />
@@ -194,12 +193,18 @@ class DisplayAllNotes extends Component {
                             <Chip
                               size="small"
                               label={label.name}
-                              // onClick={handleClick}
                               onDelete={() =>
                                 this.handelRemoveNote(label, text.noteId)
                               }
                               deleteIcon={<ClearOutlinedIcon />}
                             />
+                          ))}
+                        </div>
+                      )}
+                      {text.collabUsers && (
+                        <div>
+                          {text.collabUsers.map(users=>(
+                            <Avatar>{users.profilePicture}</Avatar>
                           ))}
                         </div>
                       )}
