@@ -53,6 +53,7 @@ class AccountInfo extends Component {
     UploadUserProfile(formData, tokenUserId)
       .then(response => {
         console.log("user profile saved successfully");
+        localStorage.setItem("profilePic",response.data.data)
       })
       .catch(err => {
         console.log("profile pic save error");
@@ -131,7 +132,7 @@ class AccountInfo extends Component {
               }}
             >
               <img
-                src={Fundoo}
+                src={profilePic}
                 alt={nullProfile}
                 style={{
                   hight: "100px",
