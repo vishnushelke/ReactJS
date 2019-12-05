@@ -4,8 +4,17 @@ import ArchiveOutlinedIcon from "@material-ui/icons/ArchiveOutlined";
 import { ArchiveUserNote } from "./Service";
 
 class ArchiveNote extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       archive:false
+    }
+  }
+  
 handleArchiveNote=()=>{
-  let tokenUserId =localStorage.getItem("LoginToken");
+  if(this.props.note){
+    let tokenUserId =localStorage.getItem("LoginToken");
     let noteId=this.props.note.noteId
     console.log(noteId);
     
@@ -16,6 +25,13 @@ handleArchiveNote=()=>{
         console.log('note archive unsuccess');
         
     })
+  }else{
+    this.setState({
+      archive:!this.state.archive
+    })
+    console.log(this.state.archive);    
+    this.props.refresh(this.state.archive)
+  }
 }
   render() {
     return (

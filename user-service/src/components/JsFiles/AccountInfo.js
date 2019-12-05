@@ -6,13 +6,16 @@ import {
   Divider,
   IconButton,
   TextField,
-  Avatar
+  Avatar,
+  InputBase,
+  ClickAwayListener
 } from "@material-ui/core";
 import profilePic from "../../Assets/images.jpeg";
 import Button from "@material-ui/core/Button";
 import Fundoo from "../../Assets/images.jpeg";
 import nullProfile from "../../Assets/nullProfile.jpg";
-import { UploadUserProfile } from "./Service";
+import { UploadUserProfile, GetUserProfile } from "./Service";
+const fs = require("fs");
 
 class AccountInfo extends Component {
   constructor(props) {
@@ -21,7 +24,7 @@ class AccountInfo extends Component {
     this.state = {
       anchorEl: null,
       open: false,
-      image:null
+      image: null
     };
   }
   handleAccountInfo = event => {
@@ -37,27 +40,54 @@ class AccountInfo extends Component {
   };
   handleImageChange = event => {
     this.setState({
-      image:event.target.files[0]
-    })
+      image: event.target.files[0]
+    });
   };
-  handelUploadImage=()=>{
-    console.log('into upload image' , this.state.image);
-    localStorage.setItem("profilePic",this.state.image)
-    let tokenUserId=localStorage.getItem("loginToken")
-    UploadUserProfile(this.state.image,tokenUserId).then(response=>{
-      console.log('user profile saved successfully');
-    }).catch(err=>{
-      console.log('profile pic save error');      
-    })
+  handelUploadImage = () => {
+    console.log("into upload image", this.state.image);
+    const formData = new FormData();
+    formData.append("file", this.state.image);
+
+    localStorage.setItem("profilePic", this.state.image);
+    let tokenUserId = localStorage.getItem("LoginToken");
+    UploadUserProfile(formData, tokenUserId)
+      .then(response => {
+        console.log("user profile saved successfully");
+      })
+      .catch(err => {
+        console.log("profile pic save error");
+      });
+  };
+  componentWillMount() {
+    this.getProfile();
   }
+  handelClose = () => {
+    this.setState({ anchorEl: null });
+  };
+  getProfile = () => {
+    GetUserProfile(localStorage.getItem("LoginToken"))
+      .then(response => {
+        console.log(
+          "profile fetched successfully",
+          JSON.stringify(response.data.data)
+        );
+        this.setState({
+          image: response.data.data
+        });
+      })
+      .catch(err => {
+        console.log("profile pic fetch fail");
+      });
+  };
 
   render() {
     let name = localStorage.getItem("name");
     let email = localStorage.getItem("emailId");
-    let profilePic=localStorage.getItem("profilePic")
+    let profilePic = localStorage.getItem("profilePic");
     let open = this.state.open;
     const id = open ? "scroll-playground" : null;
     return (
+      // <ClickAwayListener onClickAway={this.handleAccountInfo}>
       <div
         style={{
           display: "flex",
@@ -65,12 +95,13 @@ class AccountInfo extends Component {
           textAlign: "center"
         }}
       >
-        <Avatar
+        <img
           src={profilePic}
-          alt="profPic"
+          alt="kjagsS"
           style={{ hight: "50px", width: "50px" }}
           onClick={this.handleAccountInfo}
-        ></Avatar>
+          // onClose={this.handleAccountInfo}
+        ></img>
 
         <div
           style={{
@@ -83,6 +114,7 @@ class AccountInfo extends Component {
             id={id}
             open={open}
             anchorEl={this.state.anchorEl}
+            onClose={this.handelClose}
             style={{ display: "flex", justifycontent: "center" }}
           >
             <Paper
@@ -109,7 +141,7 @@ class AccountInfo extends Component {
                 }}
               ></img>
               <div style={{ display: "flex", flexDirection: "row" }}>
-                <TextField
+                <InputBase
                   type="file"
                   id="image"
                   accept="image/png, image/jpeg"
@@ -152,6 +184,7 @@ class AccountInfo extends Component {
           </Popper>
         </div>
       </div>
+      // </ClickAwayListener>
     );
   }
 }

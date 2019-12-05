@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tooltip, IconButton, Popover } from "@material-ui/core";
+import { Tooltip, IconButton, Popover, Paper } from "@material-ui/core";
 import ColorLensOutlinedIcon from "@material-ui/icons/ColorLensOutlined";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { ColorUserNote } from "./Service";
@@ -7,10 +7,9 @@ const theme = createMuiTheme({
   overrides: {
     MuiPaper: {
       root: {
-        width:"100px",
-
+        // width:"100px",
       }
-    },
+    }
   }
 });
 const colorsPallete = [
@@ -69,36 +68,41 @@ class AddColor extends Component {
     this.state = {
       open: false,
       anchorEl: null,
-      note:{}
+      note: {}
     };
   }
- 
+
   handleColorPopper = event => {
     this.setState({
       anchorEl: event.target
     });
   };
-  handleClose=()=>{
+  handleClose = () => {
     this.setState({
-        anchorEl: null
-      });
-  }
-  setColor=(color)=>{
-      
-      let noteId=this.props.note.noteId; 
-      let tokenUserId =localStorage.getItem("LoginToken");
-      ColorUserNote(noteId,color,tokenUserId).then(response=>{
-        this.props.refresh();
-        console.log('color set successfully');
-        
-      }).catch(err=>{
-        console.log('error while adding color');
-        
-      })
-      this.setState({
-        anchorEl: null
-      });
-  }
+      anchorEl: null
+    });
+  };
+
+  setColor = color => {
+    if (this.props.note) {
+      let noteId = this.props.note.noteId;
+      let tokenUserId = localStorage.getItem("LoginToken");
+      ColorUserNote(noteId, color, tokenUserId)
+        .then(response => {
+          this.props.refresh();
+          console.log("color set successfully");
+        })
+        .catch(err => {
+          console.log("error while adding color");
+        });
+    } else {
+      this.props.refresh(color);
+    }
+
+    this.setState({
+      anchorEl: null
+    });
+  };
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
@@ -124,11 +128,16 @@ class AddColor extends Component {
               horizontal: "center"
             }}
           >
-            <div>
-              {colorsPallete.map((text, index) => (
-                <IconButton style={{ backgroundColor: text.colorCode }} onClick={()=>this.setColor(text.colorCode)}/>
-              ))}
-            </div>
+            <Paper>
+              <div>
+                {colorsPallete.map((text, index) => (
+                  <IconButton
+                    style={{ backgroundColor: text.colorCode }}
+                    onClick={() => this.setColor(text.colorCode)}
+                  />
+                ))}
+              </div>
+            </Paper>
           </Popover>
         </MuiThemeProvider>
       </div>

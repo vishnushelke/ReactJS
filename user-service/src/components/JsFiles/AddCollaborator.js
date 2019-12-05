@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
+
 import {
   Tooltip,
   Dialog,
@@ -14,12 +15,13 @@ import {
 import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
 import DoneIcon from "@material-ui/icons/Done";
 import { CollaborateNote, DeleteCollaboration } from "./Service";
+import nullPropfile from '../../Assets/nullProfile.jpg'
 
 const theme = createMuiTheme({
   overrides: {
     MuiDialog: {
       paperWidthSm: {
-        width: "700px",
+        // width: "700px",
         borderRadius: "10px"
       }
     }
@@ -64,23 +66,37 @@ class AddCollaborator extends Component {
       collaborate: event.target.value
     });
   };
+  
   handelCollaborate = () => {
-    let noteId = this.props.note.noteId;
-    let emailId = this.state.collaborate;
-    let tokenUserId = localStorage.getItem("LoginToken");
-    CollaborateNote(noteId, emailId, tokenUserId)
-      .then(response => {
-        console.log("note collaborated successfully");
-        this.props.refresh()
+    if(this.props.note){
+      let noteId = this.props.note.noteId;
+      let emailId = this.state.collaborate;
+      let tokenUserId = localStorage.getItem("LoginToken");
+      CollaborateNote(noteId, emailId, tokenUserId)
+        .then(response => {
+          console.log("note collaborated successfully",response);
+          this.props.refresh()
+          this.setState({
+            collabUsers:response.data.data
+          })
+        })
+        .catch(err => {
+          console.log("note collaboration fail");
+        });
+    }else{
+      let emailId = this.state.collaborate;
+      console.log('dhbjh',emailId);
+      this.setState({
+        collabedUsers:this.state.collabedUsers.push(emailId)
       })
-      .catch(err => {
-        console.log("note collaboration fail");
-      });
+    }
+   
   };
 
   render() {
-    console.log(this.props.note.collabUsers);
-    let collabUser = this.props.note.collabUsers;
+   let profilePicture=(this.props.note)? this.props.note.collabUsers.profilePicture:{nullPropfile}
+    let collabUser=(this.props.note)? this.props.note.collabUsers:this.state.collabedUsers
+   
     return (
       <div>
         <MuiThemeProvider theme={theme}>
@@ -97,7 +113,7 @@ class AddCollaborator extends Component {
               <DialogTitle>Collaborators</DialogTitle>
               <div>
                 <div style={{ display: "flex", flexDirection: "row" }}>
-                  <Avatar>{this.props.note.collabUsers.profilePicture}</Avatar>
+                  <Avatar>{localStorage.getItem("profilePic")}</Avatar>
                   <DialogContent>
                     <span style={{ color: "black" }}>
                       <b>{localStorage.getItem("emailId")}</b>
@@ -136,7 +152,7 @@ class AddCollaborator extends Component {
                             }}
                           >
                             <Avatar
-                              src={user.profilePicture}
+                              src={profilePicture}
                               alt="image"
                             ></Avatar>
                             <div

@@ -1,27 +1,14 @@
 import React from "react";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      data: 0
-    };
-    this.setNewNumber = this.setNewNumber.bind(this);
-  }
-  setNewNumber() {
-    this.setState({ data: this.state.data + 1 });
-  }
-  render() {
-    return (
-      <div>
-        <button onClick={this.setNewNumber}>INCREMENT</button>
-        <Content myNumber={this.state.data}></Content>
-      </div>
-    );
-  }
-}
 class Content extends React.Component {
+  constructor(props) {
+    console.log('constructor called');
+    super(props)
+  
+    
+  }
+  
   componentWillMount() {
     console.log("Component WILL MOUNT!");
   }
@@ -45,6 +32,7 @@ class Content extends React.Component {
     console.log("Component WILL UNMOUNT!");
   }
   render() {
+    console.log('render called');
     return (
       <div>
         <h3>{this.props.myNumber}</h3>
@@ -52,4 +40,4 @@ class Content extends React.Component {
     );
   }
 }
-export default App;
+export default Content;

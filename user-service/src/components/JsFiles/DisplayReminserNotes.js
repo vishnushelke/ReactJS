@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, TextField, Tooltip } from "@material-ui/core";
+import { Card, TextField, Tooltip, Avatar } from "@material-ui/core";
 import { RemoveNoteReminder, GetReminderNotes } from "./Service";
 import AddReminder from "./AddReminder";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
@@ -156,10 +156,30 @@ class DisplayReminderNotes extends Component {
                         <Chip
                           size="small"
                           label={text.reminder}
-                          // onClick={handleClick}
                           onDelete={() => this.handleDelete(text)}
                           deleteIcon={<ClearOutlinedIcon />}
                         />
+                      )}
+                      {text.labels && (
+                        <div>
+                          {text.labels.map(label => (
+                            <Chip
+                              size="small"
+                              label={label.name}
+                              onDelete={() =>
+                                this.handelRemoveNote(label, text.noteId)
+                              }
+                              deleteIcon={<ClearOutlinedIcon />}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      {text.collabUsers && (
+                        <div>
+                          {text.collabUsers.map(users=>(
+                            <Avatar>{users.profilePicture}</Avatar>
+                          ))}
+                        </div>
                       )}
                       <div
                         style={{

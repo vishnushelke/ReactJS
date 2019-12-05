@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, TextField, Tooltip } from "@material-ui/core";
+import { Card, TextField, Tooltip, Chip, Avatar } from "@material-ui/core";
 import { GetUserNoteOfLabel } from "./Service";
 import AddReminder from "./AddReminder";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
@@ -10,6 +10,8 @@ import AddColor from "./AddColor";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import ArchiveNote from "./ArchiveNote";
 import MoreIcon from "./MoreIcon";
+import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
+
 const theme = createMuiTheme({
   overrides: {
     MuiPaper: {
@@ -44,8 +46,7 @@ class DisplayNotesOfLabel extends Component {
     }
   }
   getNotes = labelId => {
-    let tokenUserId =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.xw0wWGGzxZBMattBsKUw5e8nffwz7waJmunE_ag7k34";
+    let tokenUserId = localStorage.getItem("LoginToken")
     GetUserNoteOfLabel(labelId, tokenUserId)
       .then(response => {
         console.log(response);
@@ -131,6 +132,35 @@ class DisplayNotesOfLabel extends Component {
                           style={{ paddingLeft: "10px" }}
                         />
                       </div>
+                      {text.reminder && (
+                        <Chip
+                          size="small"
+                          label={text.reminder}
+                          onDelete={() => this.handleDelete(text)}
+                          deleteIcon={<ClearOutlinedIcon />}
+                        />
+                      )}
+                      {text.labels && (
+                        <div>
+                          {text.labels.map(label => (
+                            <Chip
+                              size="small"
+                              label={label.name}
+                              onDelete={() =>
+                                this.handelRemoveNote(label, text.noteId)
+                              }
+                              deleteIcon={<ClearOutlinedIcon />}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      {text.collabUsers && (
+                        <div>
+                          {text.collabUsers.map(users=>(
+                            <Avatar>{users.profilePicture}</Avatar>
+                          ))}
+                        </div>
+                      )}
                       <div
                         style={{
                           display: "flex",

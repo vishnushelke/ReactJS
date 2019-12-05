@@ -37,6 +37,8 @@ export function ResetUserPassword(setPasswordDto,token){
     })
 }
 export function AddUserNote(createNoteDto,tokenUserId){
+    console.log(createNoteDto,"createNoteDto in service");
+    
     return axios.post('http://localhost:8080/user/notes',createNoteDto,{
         headers:{
             'Content-Type':'application/json;charset=utf-8',
@@ -218,11 +220,22 @@ export function UpdateUserLabel(labelId,tokenUserId,addLabelDto){
         }
     })
 }
-export function UploadUserProfile(file,tokenUserId){    
-    return axios.post('http://localhost:8080/user/addprofile',file,{
+export function UploadUserProfile(formData,token){   
+    console.log(token);
+     
+    return axios.post('http://localhost:8080/user/addprofile',formData,{
         headers:{
-            // "Content-Type": "multipart/form-data",
-            'tokenUserId':tokenUserId
+            'content-type': 'multipart/form-data',
+            'token':token
+        }
+
+    })
+}
+export function GetUserProfile(token){    
+    return axios.get('http://localhost:8080/user/getprofile',{
+        headers:{
+            "Content-Type": "multipart/form-data",
+            'token':token
         }
     })
 }

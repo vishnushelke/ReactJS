@@ -39,7 +39,7 @@ function App() {
           <Route path="/user/validate/:token" component={VerifyUser} />
           <Route path="/ResetPassword" component={ResetPassword} />
           <Route path="/VerifyUserToReset" component={VerifyUserToReset} />
-          <Route path="/AddNotePopper" component={AddNotePopper} />{" "}
+          <Route path="/AddNotePopper" component={AddNotePopper} />
           {/* <Route path='/' component={CompLifeCycle} />   
       <Route path='/comp' component={ComponentLifeCycle} />    */}
         </switch>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, TextField, Tooltip } from "@material-ui/core";
+import { Card, TextField, Tooltip, Chip, Avatar } from "@material-ui/core";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import EditNote from "./EditNote";
 import AddColor from "./AddColor";
@@ -9,6 +9,7 @@ import { GetArchivedUserNote } from "./Service";
 import UnarchiveNote from "./UnarchiveNote";
 import Masonry from "react-masonry-component";
 import AddReminder from "./AddReminder";
+import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
 
 const theme = createMuiTheme({
   overrides: {
@@ -123,6 +124,35 @@ class DisplayArchiveNotes extends Component {
                         style={{ paddingLeft: "10px" }}
                       />
                     </div>
+                    {text.reminder && (
+                        <Chip
+                          size="small"
+                          label={text.reminder}
+                          onDelete={() => this.handleDelete(text)}
+                          deleteIcon={<ClearOutlinedIcon />}
+                        />
+                      )}
+                      {text.labels && (
+                        <div>
+                          {text.labels.map(label => (
+                            <Chip
+                              size="small"
+                              label={label.name}
+                              onDelete={() =>
+                                this.handelRemoveNote(label, text.noteId)
+                              }
+                              deleteIcon={<ClearOutlinedIcon />}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      {text.collabUsers && (
+                        <div>
+                          {text.collabUsers.map(users=>(
+                            <Avatar>{users.profilePicture}</Avatar>
+                          ))}
+                        </div>
+                      )}
                     <div
                       style={{
                         display: "flex",
@@ -132,7 +162,7 @@ class DisplayArchiveNotes extends Component {
                         paddingTop: "10px"
                       }}
                     >
-                      <AddReminder note={text} refresh={this.getNotes} />
+                      <AddReminder note={text} refresh={this.handelArchivedNotes} />
                       <Tooltip title="collaborator">
                         <PersonAddOutlinedIcon style={{ width: "20px" }} />
                       </Tooltip>

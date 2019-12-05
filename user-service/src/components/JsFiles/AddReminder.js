@@ -119,7 +119,7 @@ export default class AddReminder extends Component {
                 noteId: this.props.note.noteId
             }
             let remindernew=''
-            date=reminderTime.reminder.split(' ')
+            date=reminderDate.split(' ')
             console.log(date,'date array');
             
             remindernew=date[2]+' '+date[1]+' '+date[3]+' '+date[4]+' UTC'
@@ -133,7 +133,13 @@ export default class AddReminder extends Component {
         } 
         else {
             // this.props.setReminderOnNewNote(reminderDate);
+            let date=[]
+            date=reminderDate.split(' ')
+            console.log(date,'date array');
+            let remindernew=''
+            remindernew=date[2]+' '+date[1]+' '+date[3]+' '+date[4]+' UTC'
             console.log("note data",this.props.note);
+            this.props.refresh(remindernew);
         }
         
 

@@ -54,7 +54,8 @@ export default withStyles(styles)(
       dupLabels: [],
       createTag: false,
       labelSearch:'',
-      labelMessage:''
+      labelMessage:'',
+      
     };
 
     componentWillReceiveProps(nextProps) {
@@ -69,6 +70,7 @@ export default withStyles(styles)(
         let tokenUserId = localStorage.getItem("LoginToken")
         RemoveNoteFromLabel(noteId,labelId,tokenUserId).then(response=>{
           this.props.refresh();
+          this.props.close()
         }).catch(err => {
           console.log(err);
         });
